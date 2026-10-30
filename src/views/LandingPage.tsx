@@ -1,0 +1,565 @@
+import React from 'react';
+import {
+  ShieldCheck,
+  Search,
+  UserCheck,
+  AlertOctagon,
+  ArrowRight,
+  Globe2,
+  Lock,
+  Layers,
+  CheckCircle2,
+  ExternalLink,
+  ChevronRight,
+} from 'lucide-react';
+import { SupportedLanguage, translations } from '../i18n/translations';
+
+interface LandingPageProps {
+  onNavigate: (view: string) => void;
+  language: SupportedLanguage;
+}
+
+export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }) => {
+  const t = translations[language] || translations.en;
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      {/* 1. Hero Section */}
+      <section className="relative overflow-hidden pt-12 pb-20 border-b border-slate-900">
+        {/* Subtle background glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-600/10 blur-[120px] pointer-events-none rounded-full" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: Headlines & Call to Action */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-wider uppercase bg-cyan-950/40 px-3 py-1.5 rounded border border-cyan-800/40">
+                <ShieldCheck size={14} />
+                <span>Next-Gen Cybersecurity Defense</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-tight">
+                {t.hero.headline}
+              </h1>
+
+              <p className="text-lg text-slate-300 max-w-2xl leading-relaxed">
+                {t.hero.description}
+              </p>
+
+              <div className="p-3.5 bg-slate-900/70 border border-slate-800 rounded-lg text-xs text-slate-400 space-y-1">
+                <p className="font-semibold text-slate-300">
+                  Tagline: <span className="text-cyan-400">"{t.tagline}"</span>
+                </p>
+                <p>{t.subTagline}</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  onClick={() => onNavigate('message-scanner')}
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-all shadow-lg shadow-cyan-500/20 whitespace-nowrap cursor-pointer"
+                >
+                  <span>{t.hero.scanCta}</span>
+                  <ArrowRight size={16} />
+                </button>
+
+                <button
+                  onClick={() => onNavigate('dashboard')}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-lg transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  <span>{t.hero.exploreCta}</span>
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+
+              {/* Supported users ticker */}
+              <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-400">
+                <span className="text-slate-400 font-medium">Built for:</span>
+                <span>Students</span>
+                <span aria-hidden="true" className="text-slate-600">·</span>
+                <span>Ordinary Internet Users</span>
+                <span aria-hidden="true" className="text-slate-600">·</span>
+                <span>Elderly Citizens</span>
+                <span aria-hidden="true" className="text-slate-600">·</span>
+                <span>Small Businesses</span>
+                <span aria-hidden="true" className="text-slate-600">·</span>
+                <span>UPI & Banking Users</span>
+              </div>
+            </div>
+
+            {/* Right Column: Visual Shield Asset */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900/40">
+                <img
+                  src="/src/assets/images/hero_cyber_shield_1793379701994.jpg"
+                  alt="TrustLens AI Cybersecurity Security Operations Shield"
+                  className="w-full h-auto object-cover rounded-xl"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 p-3 bg-slate-950/80 backdrop-blur-md rounded-lg border border-slate-800/80 text-[11px] font-mono text-slate-300 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+                    <span>DEFENSIVE ANALYSIS ACTIVE</span>
+                  </div>
+                  <span className="text-cyan-400">NON-EXECUTING SANDBOX</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Threat Protection Overview */}
+      <section className="py-16 border-b border-slate-900 bg-slate-950/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              Targeted Protection for Modern Digital Threats
+            </h2>
+            <p className="text-sm text-slate-400">
+              Cyber deception in India has evolved past crude spam into sophisticated social engineering targeting fear, urgency, and unfamiliarity with digital systems.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: 'Bank KYC & PAN Blocks',
+                desc: 'Fake warnings threatening account freeze unless links to cloned portals (.top, .xyz) are opened within 24 hours.',
+                vector: 'SMS / WhatsApp',
+              },
+              {
+                title: 'UPI PIN Deception',
+                desc: 'Fraudulent refund requests, lottery scratch cards, and QR codes designed to debit rather than credit money.',
+                vector: 'Payment Apps',
+              },
+              {
+                title: 'Utility Disconnection',
+                desc: 'High-urgency threats claiming electricity, SIM, or LPG will be disconnected tonight at 9:30 PM.',
+                vector: 'Hinglish Smishing',
+              },
+              {
+                title: 'Task & Fake Job Scams',
+                desc: 'Remote part-time tasks promising thousands for hotel reviews that end in high-value advance extortion.',
+                vector: 'Telegram / WhatsApp',
+              },
+            ].map((threat, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition-colors space-y-3"
+              >
+                <div className="flex items-center justify-between text-xs font-mono text-slate-500">
+                  <span>VECTOR {idx + 1}</span>
+                  <span className="text-cyan-400">{threat.vector}</span>
+                </div>
+                <h3 className="text-base font-semibold text-slate-100">{threat.title}</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">{threat.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Three Major Capabilities */}
+      <section className="py-20 border-b border-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
+            <h2 className="text-3xl font-bold text-white">
+              Core Security Capabilities
+            </h2>
+            <p className="text-sm text-slate-400">
+              Three specialized verification engines inspect every dimension of incoming communication.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Capability 1 */}
+            <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition-all">
+              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                <AlertOctagon size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-slate-100">
+                AI Message Security Scanner
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Evaluates SMS, email bodies, and WhatsApp forwards across multi-lingual and code-mixed patterns (English, Hindi, Hinglish). Detects coercive urgency, false authority, and credential traps.
+              </p>
+              <button
+                onClick={() => onNavigate('message-scanner')}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 cursor-pointer"
+              >
+                <span>Launch Message Scanner</span>
+                <ChevronRight size={14} />
+              </button>
+            </div>
+
+            {/* Capability 2 */}
+            <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition-all">
+              <div className="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <Search size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-slate-100">
+                Suspicious Link Inspector
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Deconstructs untrusted URLs without opening them. Uncovers raw IP addresses, typosquatting, deceptive brand subdomains, punycode lookalikes, and abusive TLD extensions.
+              </p>
+              <button
+                onClick={() => onNavigate('url-checker')}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 cursor-pointer"
+              >
+                <span>Inspect Suspicious Links</span>
+                <ChevronRight size={14} />
+              </button>
+            </div>
+
+            {/* Capability 3 */}
+            <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition-all">
+              <div className="w-12 h-12 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                <UserCheck size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-slate-100">
+                Identity Impersonation Detection
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Cross-validates claimed organisations against sender email domains, consumer phone numbers, and web domains. Never declares an identity verified without authentic provenance.
+              </p>
+              <button
+                onClick={() => onNavigate('identity-checker')}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 cursor-pointer"
+              >
+                <span>Check Identity Trust</span>
+                <ChevronRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. How TrustLens Works in Three Steps */}
+      <section className="py-20 border-b border-slate-900 bg-slate-950/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
+            <h2 className="text-3xl font-bold text-white">
+              How TrustLens Works in Three Steps
+            </h2>
+            <p className="text-sm text-slate-400">
+              A transparent, safe verification workflow that protects your devices from execution risk.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div className="p-6 bg-slate-900/60 rounded-xl border border-slate-800 space-y-3">
+              <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold">
+                Step 01
+              </div>
+              <h3 className="text-lg font-semibold text-white">Paste Untrusted Content</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Paste any questionable SMS, WhatsApp message, email, or URL into TrustLens. Content is isolated as plain text—no scripts or web links are executed.
+              </p>
+            </div>
+
+            <div className="p-6 bg-slate-900/60 rounded-xl border border-slate-800 space-y-3">
+              <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold">
+                Step 02
+              </div>
+              <h3 className="text-lg font-semibold text-white">Forensic Signal Extraction</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                The engine evaluates domain reputation, psychological pressure (fear, greed, artificial urgency), financial extraction triggers, and sender provenance.
+              </p>
+            </div>
+
+            <div className="p-6 bg-slate-900/60 rounded-xl border border-slate-800 space-y-3">
+              <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold">
+                Step 03
+              </div>
+              <h3 className="text-lg font-semibold text-white">Actionable Verification Guidance</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Receive an explainable risk assessment with highlighted manipulation triggers and exact safe steps to verify the institution through trusted official channels.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Multilingual Support Showcase */}
+      <section className="py-16 border-b border-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider bg-cyan-950/40 px-3 py-1 rounded border border-cyan-800/40">
+                <Globe2 size={14} />
+                <span>Multilingual & Code-Mixed Intelligence</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                Engineered for India's Linguistic Diversity
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Fraudsters deliberately craft messages in regional vernaculars or code-mixed Hinglish to exploit users who may not be comfortable in English. TrustLens processes English and Hindi (हिन्दी) seamlessly.
+              </p>
+              <div className="space-y-2 pt-2 text-xs text-slate-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 shrink-0" />
+                  <span>Supports pure English, pure Hindi, and code-mixed Latin transliterations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 shrink-0" />
+                  <span>Identifies local administrative deception (BESCOM, UP Power, SBI YONO, India Post)</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 font-mono text-xs">
+                <div className="text-[11px] text-slate-500 uppercase tracking-wider pb-2 border-b border-slate-800">
+                  Sample Code-Mixed Verification Input
+                </div>
+                <div className="p-3 rounded bg-slate-950 border border-slate-800/80 text-rose-300">
+                  "Dear Consumer, Your electricity bill not updated. Power supply will be disconnected tonight at 9:30 PM. Call Mr. Sharma immediately..."
+                </div>
+                <div className="p-3 rounded bg-cyan-950/30 border border-cyan-800/40 text-cyan-200">
+                  Detected Signals: <span className="text-rose-400 font-bold">CRITICAL URGENCY</span> · Personal phone number impersonating utility · Coercive blackout threat
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Security Statistics (Clearly Labelled Illustrative Benchmark Figures) */}
+      <section className="py-16 border-b border-slate-900 bg-slate-950/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h2 className="text-xl font-bold text-white">
+                Threat Landscape & Security Benchmarks
+              </h2>
+              <p className="text-xs text-slate-400">
+                National cybersecurity landscape context & simulated benchmark performance
+              </p>
+            </div>
+            <span className="text-[11px] font-mono text-amber-400/90 bg-amber-950/40 px-2.5 py-1 rounded border border-amber-800/40 shrink-0">
+              Illustrative figures for demonstration
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800 space-y-2">
+              <p className="text-3xl font-extrabold text-cyan-400 font-mono tabular-nums">
+                68%
+              </p>
+              <h3 className="text-xs font-semibold text-slate-200">SMS / Smishing Share</h3>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                Estimated proportion of digital banking scams initiated via fraudulent SMS links.
+              </p>
+            </div>
+
+            <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800 space-y-2">
+              <p className="text-3xl font-extrabold text-rose-400 font-mono tabular-nums">
+                &lt; 15 min
+              </p>
+              <h3 className="text-xs font-semibold text-slate-200">Urgency Window</h3>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                Average artificial deadline imposed by scammers before victims can verify with family.
+              </p>
+            </div>
+
+            <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800 space-y-2">
+              <p className="text-3xl font-extrabold text-emerald-400 font-mono tabular-nums">
+                0 PINs
+              </p>
+              <h3 className="text-xs font-semibold text-slate-200">UPI Receipt Rule</h3>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                UPI architecture never requires entering a PIN to receive or accept funds.
+              </p>
+            </div>
+
+            <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800 space-y-2">
+              <p className="text-3xl font-extrabold text-indigo-400 font-mono tabular-nums">
+                5 Stages
+              </p>
+              <h3 className="text-xs font-semibold text-slate-200">Forensic Pipeline</h3>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                Multi-layer inspection across linguistics, domain entropy, entity cross-matching, and psychology.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Why TrustLens is Different */}
+      <section className="py-20 border-b border-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
+            <h2 className="text-3xl font-bold text-white">
+              Why TrustLens is Different
+            </h2>
+            <p className="text-sm text-slate-400">
+              We reject opaque blackbox scores in favor of transparent, explainable forensic reasoning.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
+              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                Explains "WHY" Instead of Just Rating
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Generic spam blockers assign an unexplained number. TrustLens highlights the exact psychological hooks, suspicious domain structures, and missing corporate authentication headers.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
+              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                Strict Non-Executing Defensive Sandbox
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                TrustLens never visits, pings, or executes submitted URLs. Your device and our servers remain insulated from drive-by downloads or zero-day browser exploits.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
+              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-indigo-400" />
+                Local & Indian Regulatory Alignment
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Trained on TRAI 6-character DLT header protocols, Indian bank URL registries (.bank.sbi, hdfcbank.com), NPCI UPI rules, and state electricity board formats.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
+              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
+                Direct Official Verification Channels
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Every report provides concrete, safe alternatives: toll-free numbers on physical bank cards, official portal addresses, and national cyber reporting procedures (1930 / cybercrime.gov.in).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Call To Action Banner */}
+      <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950 border-b border-slate-800">
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
+            Have a Message That Seems Suspicious?
+          </h2>
+          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto">
+            Do not click the link. Do not enter your PIN. Paste the content into TrustLens and receive an immediate forensic breakdown.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <button
+              onClick={() => onNavigate('message-scanner')}
+              className="px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors whitespace-nowrap cursor-pointer"
+            >
+              Scan Message in Sandbox
+            </button>
+            <button
+              onClick={() => onNavigate('url-checker')}
+              className="px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors whitespace-nowrap cursor-pointer"
+            >
+              Inspect Untrusted Link
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Professional Footer */}
+      <footer className="py-12 bg-slate-950 text-slate-400 text-xs border-t border-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-slate-100 font-extrabold font-mono text-base">
+                <ShieldCheck size={18} className="text-cyan-400" />
+                <span>TRUSTLENS AI</span>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed">
+                Intelligent digital security assistant built for the 24-hour national hackathon. Defending digital identity and protecting citizens from social engineering.
+              </p>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase text-slate-200 mb-3 font-mono">
+                Security Tools
+              </p>
+              <ul className="space-y-2">
+                <li>
+                  <button onClick={() => onNavigate('message-scanner')} className="hover:text-cyan-400 cursor-pointer">
+                    AI Message Security Scanner
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('url-checker')} className="hover:text-cyan-400 cursor-pointer">
+                    Suspicious Link Inspector
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('identity-checker')} className="hover:text-cyan-400 cursor-pointer">
+                    Identity Trust Checker
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('scan-history')} className="hover:text-cyan-400 cursor-pointer">
+                    Scan History
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase text-slate-200 mb-3 font-mono">
+                Resources
+              </p>
+              <ul className="space-y-2">
+                <li>
+                  <button onClick={() => onNavigate('awareness-centre')} className="hover:text-cyan-400 cursor-pointer">
+                    Security Awareness Centre
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('about')} className="hover:text-cyan-400 cursor-pointer">
+                    How TrustLens Works
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('dashboard')} className="hover:text-cyan-400 cursor-pointer">
+                    SOC Dashboard
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase text-slate-200 mb-3 font-mono">
+                National Cyber Helpline
+              </p>
+              <p className="text-[11px] text-slate-400">
+                In India, report active cyber fraud within the "golden hour" to helpline:
+              </p>
+              <a
+                href="https://cybercrime.gov.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded bg-slate-900 hover:bg-slate-800 border border-slate-800 text-cyan-300 hover:text-cyan-200 font-mono font-bold text-sm flex items-center justify-between group transition-colors"
+                title="Visit National Cyber Crime Reporting Portal (cybercrime.gov.in)"
+              >
+                <span>Dial 1930 · cybercrime.gov.in</span>
+                <ExternalLink size={14} className="text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+            <p>© 2026 TrustLens AI. All rights reserved. Defensive cybersecurity assistant.</p>
+            <p>Illustrative demonstration data. Not legal or financial advice.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};

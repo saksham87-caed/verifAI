@@ -1,0 +1,8 @@
+{
+  "name": "TrustLens AI",
+  "description": "AI-powered cybersecurity assistant for phishing detection, identity impersonation verification, and digital deception protection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
