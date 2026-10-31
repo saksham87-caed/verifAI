@@ -1,9 +1,9 @@
-# TrustLens AI
+# verifAI
 
 > **"Don't Trust the Message. Verify the Identity."**  
 > *Your AI-powered shield against phishing, impersonation, and digital deception.*
 
-TrustLens AI is a defensive, privacy-preserving cybersecurity assistant designed for high-risk phishing, smishing, and digital impersonation attacks, with specialized focus on the Indian financial and communications ecosystem (UPI scams, bank KYC suspensions, electricity blackout threats, job extortion, and regional languages including English and Hindi).
+verifAI is a defensive, privacy-preserving cybersecurity assistant designed for high-risk phishing, smishing, and digital impersonation attacks, with specialized focus on the Indian financial and communications ecosystem (UPI scams, bank KYC suspensions, electricity blackout threats, job extortion, and regional languages including English and Hindi).
 
 ---
 
@@ -30,10 +30,10 @@ TrustLens AI is a defensive, privacy-preserving cybersecurity assistant designed
          (SAFE | SUSPICIOUS | HIGH_RISK)
                        │
                        ▼
-           ┌──────────────────────┐
-           │   Gemini 2.5 Flash   │ ── Strict delimiter isolation
-           │  (Language & Synth)  │    JSON-schema response validation
-           └──────────────────────┘    8s timeout + 1 retry
+            ┌──────────────────────┐
+            │   Gemini 3.8 Flash   │ ── Strict delimiter isolation
+            │  (Language & Synth)  │    JSON-schema response validation
+            └──────────────────────┘    8s timeout + 1 retry
                        │
                        ├─────────────────► [ Graceful Fallback: llm_used = false ]
                        ▼
@@ -44,14 +44,14 @@ TrustLens AI is a defensive, privacy-preserving cybersecurity assistant designed
 ```
 
 1. **Deterministic Rule Engine as Single Source of Truth**: All risk tiers, signal detections, and evidence offset ranges (`start`, `end`) are computed deterministically. The engine is explainable, reproducible, and impervious to LLM hallucination.
-2. **Gemini 2.5 Flash for Linguistic Synthesis**: Gemini synthesizes actionable, human-readable explanations and identifies subtle psychological manipulation triggers within strict data delimiters.
-3. **Graceful Fallback Guarantee**: If the LLM call times out (8 seconds) or if the API key is not configured, TrustLens returns a complete, valid result generated purely by the heuristic engine with `llm_used: false`. The user interface never crashes or blocks.
+2. **Gemini 3.8 Flash for Linguistic Synthesis**: Gemini synthesizes actionable, human-readable explanations and identifies subtle psychological manipulation triggers within strict data delimiters.
+3. **Graceful Fallback Guarantee**: If the LLM call times out (8 seconds) or if the API key is not configured, verifAI returns a complete, valid result generated purely by the heuristic engine with `llm_used: false`. The user interface never crashes or blocks.
 
 ---
 
 ## 🔒 Hard Safety Rules (Defensive Protocol)
 
-TrustLens adheres strictly to non-negotiable defensive constraints:
+verifAI adheres strictly to non-negotiable defensive constraints:
 
 - **Static String Analysis Only**: URLs in messages are NEVER fetched, connected to, resolved via DNS, or visited.
 - **Zero Automated Actions**: The system never sends replies, emails, SMS, or triggers external actions on the user's behalf.
@@ -130,9 +130,9 @@ Returns 26 curated synthetic test samples spanning:
 - Tricky benign messages with security disclaimers (e.g. HDFC debit alert with "Do NOT share OTP").
 
 ### 5. `POST /api/compare`
-Compares a message simultaneously against a **Naive Keyword Baseline** and **TrustLens AI**:
+Compares a message simultaneously against a **Naive Keyword Baseline** and **verifAI**:
 - Demonstrates why keyword filters fail (false alarms on benign security warnings, false negatives on obfuscated or lookalike URLs).
-- Highlights TrustLens's contextual and offset-level forensic edge.
+- Highlights verifAI's contextual and offset-level forensic edge.
 
 ### 6. `GET /api/health`
 Health check endpoint reporting `{ "status": "ok", "llm_configured": boolean }`.
@@ -159,8 +159,8 @@ Executes 27 tests across 8 categories:
 ```bash
 npm run eval
 ```
-Evaluates TrustLens against the 26-sample benchmark dataset compared to a naive keyword filter:
-- **TrustLens Accuracy**: ~96.2% (100% Precision, 100% Recall, 0 False Negatives)
+Evaluates verifAI against the 26-sample benchmark dataset compared to a naive keyword filter:
+- **verifAI Accuracy**: ~96.2% (100% Precision, 100% Recall, 0 False Negatives)
 - **Naive Keyword Baseline Accuracy**: ~53.8% (high false positive rate on benign banking disclaimers)
 
 ---

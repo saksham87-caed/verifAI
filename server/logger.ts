@@ -17,16 +17,16 @@ export interface LogEvent {
 export const secLog = {
   info(msg: string, meta?: LogEvent): void {
     const metaStr = meta ? ` | ${JSON.stringify(meta)}` : '';
-    console.log(`[TrustLens][INFO] ${msg}${metaStr}`);
+    console.log(`[verifAI][INFO] ${msg}${metaStr}`);
   },
 
   warn(msg: string, meta?: LogEvent): void {
     const metaStr = meta ? ` | ${JSON.stringify(meta)}` : '';
-    console.warn(`[TrustLens][WARN] ${msg}${metaStr}`);
+    console.warn(`[verifAI][WARN] ${msg}${metaStr}`);
   },
 
   error(msg: string, meta?: LogEvent): void {
     const metaStr = meta ? ` | ${JSON.stringify(meta)}` : '';
-    console.error(`[TrustLens][ERROR] ${msg}${metaStr}`);
+    console.error(`[verifAI][ERROR] ${msg}${metaStr}`);
   },
 };

@@ -1,11 +1,11 @@
-# TRUSTLENS AI — SECURITY, INTEGRITY & FULL-STACK AUDIT
+# verifAI — SECURITY, INTEGRITY & FULL-STACK AUDIT
 
 **Audit Date**: October 30, 2026  
 **Auditor**: Senior Full-Stack Security Engineer  
 **Baseline Test Status**: 27/27 Vitest unit tests passing  
 **Baseline Lint Status**: Passed (0 TypeScript errors)  
 **Baseline Build Status**: Passed (Vite production build)  
-**Baseline Evaluation Accuracy**: TrustLens 96.2% vs Naive Keyword Baseline 53.8%  
+**Baseline Evaluation Accuracy**: verifAI 96.2% vs Naive Keyword Baseline 53.8%  
 
 ---
 
@@ -37,7 +37,7 @@
 ## 2. Gate Verification Milestones
 
 - [x] **Phase 0 Baseline**: Verified clean build, test suite (27 tests), and eval benchmark (96.2% accuracy).
-- [ ] **Phase 1 Gate**: P0 Fixes (PII redaction, Helmet CSP, Feedback 404/409, Source labeling, Truthful URL/Identity).
-- [ ] **Phase 2 Gate**: P1 Fixes (Unified scoring policy, Clean dashboard stats, Resilient history, Scanner flow).
-- [ ] **Phase 3 Gate**: P1/P2 UI & Accessibility polish (Modals, Unicode offsets, Empty states, Contrast).
-- [ ] **Phase 4 Gate**: Tests, Verification & Benchmark Comparison.
+- [x] **Phase 1 Gate**: P0 Fixes (PII redaction, Helmet CSP, Feedback 404/409, Source labeling, Truthful URL/Identity).
+- [x] **Phase 2 Gate**: P1 Fixes (Unified scoring policy, Clean dashboard stats, Resilient history, Scanner flow).
+- [x] **Phase 3 Gate**: P1/P2 UI & Accessibility polish (Modals, Unicode offsets, Empty states, Contrast).
+- [x] **Phase 4 Gate**: Tests, Verification & Benchmark Comparison.

@@ -60,13 +60,13 @@ function calculateMetrics(
 
 export function runEvaluation(): void {
   console.log('================================================================');
-  console.log(' TRUSTLENS.AI - AUTOMATED BENCHMARK EVALUATION ENGINE');
+  console.log(' verifAI - AUTOMATED BENCHMARK EVALUATION ENGINE');
   console.log(` Dataset size: ${SYNTHETIC_DATASET.length} synthetic curated samples`);
   console.log(' Multi-lingual: English, Hindi (Devanagari/Romanized)');
   console.log('================================================================\n');
 
-  // 1. Evaluate TrustLens Rule Engine
-  const trustLensMetrics = calculateMetrics((text, sender, claim) => {
+  // 1. Evaluate verifAI Rule Engine
+  const verifAiMetrics = calculateMetrics((text, sender, claim) => {
     const res = runRuleEngine(text, 'auto', 'auto', sender, claim);
     return res.risk_tier;
   });
@@ -88,21 +88,21 @@ export function runEvaluation(): void {
   console.log(`    [TP: ${naiveMetrics.truePositives}, FP: ${naiveMetrics.falsePositives}]`);
   console.log(`    [FN: ${naiveMetrics.falseNegatives}, TN: ${naiveMetrics.trueNegatives}]\n`);
 
-  console.log('--- [2] TRUSTLENS.AI DEFENSIVE HEURISTIC ENGINE ---');
-  console.log(`  Accuracy:        ${(trustLensMetrics.accuracy * 100).toFixed(1)}%`);
-  console.log(`  Precision:       ${(trustLensMetrics.precision * 100).toFixed(1)}%`);
-  console.log(`  Recall:          ${(trustLensMetrics.recall * 100).toFixed(1)}%`);
-  console.log(`  F1 Score:        ${(trustLensMetrics.f1 * 100).toFixed(1)}%`);
-  console.log(`  False Positives: ${trustLensMetrics.falsePositives} (harmless messages blocked)`);
-  console.log(`  False Negatives: ${trustLensMetrics.falseNegatives} (phishing attacks missed)`);
+  console.log('--- [2] verifAI DEFENSIVE HEURISTIC ENGINE ---');
+  console.log(`  Accuracy:        ${(verifAiMetrics.accuracy * 100).toFixed(1)}%`);
+  console.log(`  Precision:       ${(verifAiMetrics.precision * 100).toFixed(1)}%`);
+  console.log(`  Recall:          ${(verifAiMetrics.recall * 100).toFixed(1)}%`);
+  console.log(`  F1 Score:        ${(verifAiMetrics.f1 * 100).toFixed(1)}%`);
+  console.log(`  False Positives: ${verifAiMetrics.falsePositives} (harmless messages blocked)`);
+  console.log(`  False Negatives: ${verifAiMetrics.falseNegatives} (phishing attacks missed)`);
   console.log('  Confusion Matrix:');
-  console.log(`    [TP: ${trustLensMetrics.truePositives}, FP: ${trustLensMetrics.falsePositives}]`);
-  console.log(`    [FN: ${trustLensMetrics.falseNegatives}, TN: ${trustLensMetrics.trueNegatives}]\n`);
+  console.log(`    [TP: ${verifAiMetrics.truePositives}, FP: ${verifAiMetrics.falsePositives}]`);
+  console.log(`    [FN: ${verifAiMetrics.falseNegatives}, TN: ${verifAiMetrics.trueNegatives}]\n`);
 
   console.log('--- PERFORMANCE COMPARISON SUMMARY ---');
-  const accDiff = ((trustLensMetrics.accuracy - naiveMetrics.accuracy) * 100).toFixed(1);
-  const fpDiff = naiveMetrics.falsePositives - trustLensMetrics.falsePositives;
-  const fnDiff = naiveMetrics.falseNegatives - trustLensMetrics.falseNegatives;
+  const accDiff = ((verifAiMetrics.accuracy - naiveMetrics.accuracy) * 100).toFixed(1);
+  const fpDiff = naiveMetrics.falsePositives - verifAiMetrics.falsePositives;
+  const fnDiff = naiveMetrics.falseNegatives - verifAiMetrics.falseNegatives;
   console.log(`  Accuracy Improvement: +${accDiff}%`);
   console.log(`  False Positives Reduced by: ${fpDiff} messages`);
   console.log(`  False Negatives (Attacks Missed) Reduced by: ${fnDiff} messages`);

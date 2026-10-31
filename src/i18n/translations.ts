@@ -64,7 +64,7 @@ export interface Translations {
 
 export const translations: Record<SupportedLanguage, Translations> = {
   en: {
-    appName: 'TRUSTLENS AI',
+    appName: 'VERIFAI',
     tagline: "Don't Trust the Message. Verify the Identity.",
     subTagline: 'Your AI-powered shield against phishing, impersonation and digital deception.',
     nav: {
@@ -93,7 +93,7 @@ export const translations: Record<SupportedLanguage, Translations> = {
     },
     scanner: {
       title: 'AI Message Security Scanner',
-      description: 'Paste any suspicious message and let TrustLens investigate its security signals.',
+      description: 'Paste any suspicious message and let verifAI investigate its security signals.',
       inputPlaceholder: 'Paste suspicious SMS, WhatsApp message, or email body here...',
       senderNamePlaceholder: 'Sender display name (optional, e.g. VK-HDFCBK, Power Corp)',
       senderContactPlaceholder: 'Sender phone or email (optional, e.g. +91 98765 43210)',
@@ -121,11 +121,11 @@ export const translations: Record<SupportedLanguage, Translations> = {
     },
     disclaimer: {
       demoNotice: 'Demonstration Mode: Security metrics and scores are computed through client forensic heuristics for testing.',
-      neverClicks: 'Defensive Architecture: TrustLens never connects to, visits, or executes untrusted links.',
+      neverClicks: 'Defensive Architecture: verifAI never connects to, visits, or executes untrusted links.',
     },
   },
   hi: {
-    appName: 'ट्रस्टलेंस AI (TRUSTLENS)',
+    appName: 'वेरिफ़AI (VERIFAI)',
     tagline: 'संदेश पर भरोसा न करें। पहचान सत्यापित करें।',
     subTagline: 'फ़िशिंग, प्रतिरूपण और डिजिटल धोखाधड़ी के ख़िलाफ़ आपका AI सुरक्षा कवच।',
     nav: {
@@ -154,7 +154,7 @@ export const translations: Record<SupportedLanguage, Translations> = {
     },
     scanner: {
       title: 'AI संदेश सुरक्षा स्कैनर',
-      description: 'किसी भी संदिग्ध संदेश को पेस्ट करें और ट्रस्टलेंस को उसके सुरक्षा संकेतों की जांच करने दें।',
+      description: 'किसी भी संदिग्ध संदेश को पेस्ट करें और वेरिफ़AI को उसके सुरक्षा संकेतों की जांच करने दें।',
       inputPlaceholder: 'संदिग्ध SMS, व्हाट्सएप संदेश या ईमेल यहाँ पेस्ट करें...',
       senderNamePlaceholder: 'प्रेषक का नाम (वैकल्पिक, जैसे: VK-SBIINB, बिजली बोर्ड)',
       senderContactPlaceholder: 'प्रेषक का नंबर या ईमेल (वैकल्पिक)',
@@ -182,7 +182,7 @@ export const translations: Record<SupportedLanguage, Translations> = {
     },
     disclaimer: {
       demoNotice: 'प्रदर्शन मोड: सुरक्षा स्कोर और विश्लेषण परीक्षण के लिए उपलब्ध हैं।',
-      neverClicks: 'सुरक्षा मानक: ट्रस्टलेंस कभी भी संदिग्ध लिंक पर क्लिक या निष्पादित नहीं करता।',
+      neverClicks: 'सुरक्षा मानक: वेरिफ़AI कभी भी संदिग्ध संदेश के लिंक पर क्लिक या निष्पादित नहीं करता।',
     },
   },
 };

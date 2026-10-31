@@ -107,7 +107,7 @@ export const HighlightedMessage: React.FC<HighlightedMessageProps> = ({
           return (
             <mark
               key={i}
-              className="px-1.5 py-0.5 mx-0.5 rounded bg-purple-950/70 border border-purple-600/50 text-purple-300 font-bold not-italic"
+              className="px-1.5 py-0.5 mx-0.5 rounded bg-white/20 border border-white/40 text-white font-bold not-italic underline decoration-dotted"
               title="Redacted PII element: Never stored or sent to AI"
             >
               {seg.text}
@@ -120,10 +120,10 @@ export const HighlightedMessage: React.FC<HighlightedMessageProps> = ({
           const isMed = seg.signal.severity === 'MEDIUM';
 
           const markClasses = isHigh
-            ? 'bg-rose-950/80 border-b-2 border-rose-500 text-rose-200 font-semibold px-1 py-0.5 rounded-xs'
+            ? 'bg-white text-black font-extrabold px-1.5 py-0.5 rounded-xs underline decoration-solid decoration-2 shadow-[0_0_10px_rgba(255,255,255,0.4)]'
             : isMed
-            ? 'bg-amber-950/80 border-b-2 border-amber-500 text-amber-200 font-semibold px-1 py-0.5 rounded-xs'
-            : 'bg-cyan-950/80 border-b-2 border-cyan-500 text-cyan-200 font-semibold px-1 py-0.5 rounded-xs';
+            ? 'bg-white/25 border-b-2 border-white text-white font-semibold px-1 py-0.5 rounded-xs underline decoration-dashed'
+            : 'bg-white/10 border-b border-white/40 text-white/90 font-medium px-1 py-0.5 rounded-xs underline decoration-wavy';
 
           return (
             <mark

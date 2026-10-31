@@ -2,17 +2,11 @@ import React from 'react';
 import {
   History,
   Search,
-  Filter,
   Trash2,
-  Database,
-  ExternalLink,
-  ShieldCheck,
-  AlertOctagon,
   FileText,
   Sparkles,
   Download,
   Check,
-  Shield,
   Eye,
   EyeOff,
 } from 'lucide-react';
@@ -33,7 +27,6 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
   const [searchQuery, setSearchQuery] = React.useState('');
   const [riskFilter, setRiskFilter] = React.useState<'ALL' | RiskLevel>('ALL');
   const [confirmClearOpen, setConfirmClearOpen] = React.useState(false);
-  const [deletingItemId, setDeletingItemId] = React.useState<string | null>(null);
   const [storeRawText, setStoreRawText] = React.useState<boolean>(() => historyManager.getStoreRawMessage());
   const [downloadNotice, setDownloadNotice] = React.useState(false);
 
@@ -62,7 +55,7 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `trustlens-scan-history-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `verifai-scan-history-${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -84,18 +77,18 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-6xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-6xl mx-auto text-white/90">
       {/* Title & Mission */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 bg-cyan-950/40 px-2.5 py-1 rounded border border-cyan-800/40">
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-white bg-white/10 px-3 py-1 rounded-full border border-white/20">
             <History size={14} />
             <span>Inspection Archive</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Security Scan History
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-white/60">
             Audit records of evaluated messages, links, and identity verifications stored locally in your browser.
           </p>
         </div>
@@ -105,17 +98,17 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
           {/* Export JSON Button */}
           <button
             onClick={handleExportJson}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-mono text-slate-300 border border-slate-800 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl glass hover:bg-white/15 text-xs font-mono text-white border border-white/20 transition-all cursor-pointer"
             title="Export local history as JSON"
           >
-            {downloadNotice ? <Check size={14} className="text-emerald-400" /> : <Download size={14} />}
+            {downloadNotice ? <Check size={14} className="text-white" /> : <Download size={14} />}
             <span>{downloadNotice ? 'Exported!' : 'Export (JSON)'}</span>
           </button>
 
           {/* Clear History Trigger */}
           <button
             onClick={() => setConfirmClearOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-rose-950/30 hover:bg-rose-900/40 text-xs font-mono text-rose-300 border border-rose-900/50 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl glass hover:bg-white/15 text-xs font-mono text-white border border-white/20 transition-all cursor-pointer"
             title="Clear stored scans"
           >
             <Trash2 size={14} />
@@ -126,23 +119,23 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
 
       {/* Confirmation Modal / Banner for Wipe */}
       {confirmClearOpen && (
-        <div className="p-4 rounded-xl bg-rose-950/40 border border-rose-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="p-4 rounded-2xl glass-strong border border-white/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1 text-xs">
-            <p className="font-bold text-rose-200">Confirm Deletion of Local Scan History?</p>
-            <p className="text-rose-300/80">
+            <p className="font-bold text-white">Confirm Deletion of Local Scan History?</p>
+            <p className="text-white/70">
               This will remove all saved scans and reset demonstration items from this browser session.
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={handleClearHistory}
-              className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-white text-black font-bold text-xs hover:bg-white/90 transition-colors cursor-pointer"
             >
               Confirm Clear
             </button>
             <button
               onClick={() => setConfirmClearOpen(false)}
-              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl glass text-white text-xs hover:bg-white/10 transition-colors cursor-pointer"
             >
               Cancel
             </button>
@@ -150,18 +143,16 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
         </div>
       )}
 
-
-
       {/* Privacy Configuration Toggle & Demo Notice */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Privacy Raw Text Toggle */}
-        <div className="p-4 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/15 flex items-center justify-between text-xs">
           <div className="space-y-0.5 pr-2">
-            <div className="flex items-center gap-1.5 font-semibold text-slate-200">
-              {storeRawText ? <Eye size={14} className="text-cyan-400" /> : <EyeOff size={14} className="text-slate-400" />}
+            <div className="flex items-center gap-1.5 font-semibold text-white">
+              {storeRawText ? <Eye size={14} className="text-white" /> : <EyeOff size={14} className="text-white/40" />}
               <span>Store Raw Message Text Locally</span>
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-white/50">
               {storeRawText
                 ? 'Raw text stored in browser localStorage for review.'
                 : 'Raw text discarded; only metadata and signals saved.'}
@@ -170,10 +161,10 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
           <button
             type="button"
             onClick={() => handleToggleStoreRaw(!storeRawText)}
-            className={`px-3 py-1.5 rounded-lg font-mono text-[11px] font-semibold border transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl font-mono text-[11px] font-bold border transition-all cursor-pointer ${
               storeRawText
-                ? 'bg-cyan-950/60 text-cyan-300 border-cyan-800'
-                : 'bg-slate-800 text-slate-400 border-slate-700'
+                ? 'bg-white text-black border-white'
+                : 'bg-white/5 text-white/50 border-white/10'
             }`}
           >
             {storeRawText ? 'Enabled' : 'Disabled'}
@@ -181,27 +172,27 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
         </div>
 
         {/* Demo records clarification */}
-        <div className="p-4 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs text-slate-400">
+        <div className="p-4 glass rounded-2xl border border-white/15 flex items-center justify-between text-xs text-white/60">
           <div className="flex items-center gap-2">
-            <Sparkles size={16} className="text-cyan-400 shrink-0" />
+            <Sparkles size={16} className="text-white shrink-0" />
             <span>
-              <strong className="text-slate-200">Session Privacy:</strong> Items tagged <span className="text-cyan-300 font-mono text-[11px]">[DEMO]</span> are benchmark scenarios; <span className="text-emerald-400 font-mono text-[11px]">[USER]</span> items reflect your live inputs.
+              <strong className="text-white">Session Privacy:</strong> Items tagged <span className="text-white font-mono text-[11px]">[DEMO]</span> are benchmark scenarios; <span className="text-white font-mono text-[11px]">[USER]</span> items reflect your live inputs.
             </span>
           </div>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 bg-slate-900/40 border border-slate-800 rounded-xl">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 glass rounded-2xl border border-white/15">
         {/* Search Field */}
         <div className="relative flex-1">
-          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search scans by sender, subject, URL or preview..."
-            className="w-full pl-10 pr-4 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 font-sans"
+            className="w-full pl-10 pr-4 py-2.5 glass-input rounded-xl text-xs font-sans focus:outline-none"
           />
         </div>
 
@@ -211,10 +202,10 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
             <button
               key={r}
               onClick={() => setRiskFilter(r)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium transition-all whitespace-nowrap cursor-pointer ${
                 riskFilter === r
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                  ? 'bg-white text-black font-bold'
+                  : 'glass text-white/60 hover:text-white border-transparent'
               }`}
             >
               {r === 'ALL' ? 'All Records' : r}
@@ -225,11 +216,11 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
 
       {/* Records Table / List */}
       {filteredScans.length > 0 ? (
-        <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+        <div className="rounded-2xl border border-white/15 glass-strong overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-[11px] font-mono uppercase text-slate-400 bg-slate-900/90">
+                <tr className="border-b border-white/10 text-[11px] font-mono uppercase text-white/40 bg-white/[0.02]">
                   <th className="py-3 px-4">Date / Time</th>
                   <th className="py-3 px-4">Type</th>
                   <th className="py-3 px-4">Subject & Preview</th>
@@ -238,28 +229,28 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
                   <th className="py-3 px-4 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-sans">
+              <tbody className="divide-y divide-white/10 font-sans">
                 {filteredScans.map((item: ScanHistoryItem) => (
-                  <tr key={item.id} className="hover:bg-slate-800/40 transition-colors">
+                  <tr key={item.id} className="hover:bg-white/5 transition-colors">
                     {/* Timestamp */}
-                    <td className="py-3 px-4 font-mono text-[11px] text-slate-400 whitespace-nowrap">
+                    <td className="py-3 px-4 font-mono text-[11px] text-white/50 whitespace-nowrap">
                       {new Date(item.timestamp).toLocaleDateString()}{' '}
-                      <span className="text-slate-500">
+                      <span className="text-white/30">
                         {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </td>
 
                     {/* Type & Demo Badge */}
                     <td className="py-3 px-4">
-                      <span className="font-mono text-[11px] uppercase text-cyan-300 font-semibold block">
+                      <span className="font-mono text-[11px] uppercase text-white font-semibold block">
                         {item.type}
                       </span>
                       {item.isDemoRecord ? (
-                        <span className="inline-block text-[10px] font-mono px-1.5 py-0.2 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">
+                        <span className="inline-block text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/10 text-white/70 border border-white/15">
                           DEMO
                         </span>
                       ) : (
-                        <span className="inline-block text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">
+                        <span className="inline-block text-[10px] font-mono px-1.5 py-0.2 rounded bg-white text-black font-bold">
                           USER SCAN
                         </span>
                       )}
@@ -267,8 +258,8 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
 
                     {/* Title & Preview */}
                     <td className="py-3 px-4 max-w-md">
-                      <p className="font-semibold text-slate-200 line-clamp-1">{item.title}</p>
-                      <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{item.preview}</p>
+                      <p className="font-semibold text-white line-clamp-1">{item.title}</p>
+                      <p className="text-[11px] text-white/50 line-clamp-1 mt-0.5">{item.preview}</p>
                     </td>
 
                     {/* Risk Badge */}
@@ -277,18 +268,8 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
                     </td>
 
                     {/* Risk Score */}
-                    <td className="py-3 px-4 text-right font-mono font-bold text-xs tabular-nums">
-                      <span
-                        className={
-                          item.riskLevel === 'HIGH'
-                            ? 'text-rose-400'
-                            : item.riskLevel === 'MEDIUM'
-                            ? 'text-amber-400'
-                            : 'text-emerald-400'
-                        }
-                      >
-                        {item.riskScore}/100
-                      </span>
+                    <td className="py-3 px-4 text-right font-mono font-bold text-xs tabular-nums text-white">
+                      {item.riskScore}/100
                     </td>
 
                     {/* Action */}
@@ -296,13 +277,13 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => onViewReport(item.data)}
-                          className="text-cyan-400 hover:text-cyan-300 font-semibold text-xs cursor-pointer"
+                          className="text-white hover:underline font-semibold text-xs cursor-pointer"
                         >
                           View Report →
                         </button>
                         <button
                           onClick={(e) => handleDeleteItem(item.id, e)}
-                          className="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-slate-800 transition-colors cursor-pointer"
+                          className="p-1 rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                           title="Delete this record"
                         >
                           <Trash2 size={13} />
@@ -317,13 +298,13 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
         </div>
       ) : (
         /* Empty State */
-        <div className="p-12 text-center rounded-xl border border-dashed border-slate-800 bg-slate-900/30 space-y-4">
-          <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 mx-auto">
+        <div className="p-12 text-center rounded-2xl glass border border-white/15 space-y-4">
+          <div className="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/50 mx-auto">
             <FileText size={24} />
           </div>
           <div className="space-y-1">
-            <h3 className="text-base font-semibold text-slate-200">No Matching Scan Records</h3>
-            <p className="text-xs text-slate-400 max-w-sm mx-auto">
+            <h3 className="text-base font-semibold text-white">No Matching Scan Records</h3>
+            <p className="text-xs text-white/50 max-w-sm mx-auto">
               {searchQuery || riskFilter !== 'ALL'
                 ? 'No items match your active filters. Clear search or filter to see previous scans.'
                 : 'No messages or URLs have been analysed yet.'}
@@ -331,7 +312,7 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
           </div>
           <button
             onClick={onOpenScanner}
-            className="px-5 py-2.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-white/90 transition-all cursor-pointer shadow-[0_0_15px_rgba(255,255,255,0.25)]"
           >
             Analyse Your First Message
           </button>

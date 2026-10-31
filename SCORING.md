@@ -1,6 +1,6 @@
-# TrustLens AI — Unified Scoring Policy Specification
+# verifAI — Unified Scoring Policy Specification
 
-This document details the single, authoritative scoring policy implemented across TrustLens AI.
+This document details the single, authoritative scoring policy implemented across verifAI.
 
 ---
 

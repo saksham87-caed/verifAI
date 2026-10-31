@@ -16,30 +16,22 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({
   const configs = {
     HIGH: {
       label: 'HIGH RISK',
-      bg: 'bg-rose-500/15',
-      text: 'text-rose-400',
-      border: 'border-rose-500/30',
+      classes: 'bg-white text-black border border-white font-extrabold shadow-[0_0_15px_rgba(255,255,255,0.3)]',
       icon: AlertCircle,
     },
     MEDIUM: {
       label: 'MEDIUM RISK',
-      bg: 'bg-amber-500/15',
-      text: 'text-amber-400',
-      border: 'border-amber-500/30',
+      classes: 'bg-transparent text-white border-2 border-white font-bold shadow-[inset_0_0_8px_rgba(255,255,255,0.1)]',
       icon: AlertTriangle,
     },
     LOW: {
       label: 'LOW RISK',
-      bg: 'bg-emerald-500/15',
-      text: 'text-emerald-400',
-      border: 'border-emerald-500/30',
+      classes: 'bg-white/5 text-white/80 border border-white/30 font-medium',
       icon: CheckCircle2,
     },
     UNVERIFIED: {
       label: 'UNVERIFIED',
-      bg: 'bg-slate-500/15',
-      text: 'text-slate-400',
-      border: 'border-slate-500/30',
+      classes: 'bg-transparent text-white/50 border border-dashed border-white/20 font-normal',
       icon: HelpCircle,
     },
   };
@@ -61,7 +53,7 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({
 
   return (
     <span
-      className={`inline-flex items-center rounded border ${config.bg} ${config.text} ${config.border} ${sizeClasses} tracking-wider font-mono uppercase whitespace-nowrap`}
+      className={`inline-flex items-center rounded-md ${config.classes} ${sizeClasses} tracking-wider font-mono uppercase whitespace-nowrap transition-all`}
     >
       {showIcon && <Icon size={iconSizes} className="shrink-0" />}
       <span>{config.label}</span>

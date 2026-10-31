@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import {
   Link2,
   ShieldAlert,
-  Search,
   RotateCcw,
-  AlertTriangle,
   CheckCircle2,
-  AlertOctagon,
-  HelpCircle,
-  ExternalLink,
   Shield,
-  Layers,
   Sparkles,
 } from 'lucide-react';
 import { UrlAnalysisResult, RiskLevel } from '../types/security';
@@ -91,36 +85,36 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto text-white/90">
       {/* Title & Mission */}
-      <div className="space-y-2 border-b border-slate-800 pb-6">
-        <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 bg-cyan-950/40 px-2.5 py-1 rounded border border-cyan-800/40">
+      <div className="space-y-2 border-b border-white/10 pb-6">
+        <div className="inline-flex items-center gap-2 text-xs font-mono text-white bg-white/10 px-3 py-1 rounded-full border border-white/20">
           <Link2 size={14} />
           <span>Non-Executing Link Sandbox</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
           Suspicious Link Inspector
         </h1>
-        <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
+        <p className="text-sm text-white/60 max-w-2xl leading-relaxed">
           Investigate suspicious links before you visit them. Untrusted text analysis parses hostnames, TLD abuse, IP-based routing, and typosquatting without executing remote code.
         </p>
       </div>
 
       {/* Safety Policy Alert */}
-      <div className="p-3.5 bg-cyan-950/20 border border-cyan-900/40 rounded-xl text-xs text-cyan-300 flex items-start gap-2.5">
-        <Shield size={16} className="text-cyan-400 shrink-0 mt-0.5" />
+      <div className="p-4 glass rounded-2xl border border-white/15 text-xs text-white/70 flex items-start gap-3">
+        <Shield size={16} className="text-white shrink-0 mt-0.5" />
         <div className="space-y-0.5">
           <p className="font-semibold text-white">Static-Only Defensive Policy:</p>
-          <p className="text-[11px] text-cyan-200/90 leading-relaxed">
-            Static analysis of the link text. No page is visited. No DNS, WHOIS or reputation lookup is performed. TrustLens treats all URLs strictly as untrusted text.
+          <p className="text-[11px] text-white/60 leading-relaxed">
+            Static analysis of the link text. No page is visited. No DNS, WHOIS or reputation lookup is performed. verifAI treats all URLs strictly as untrusted text.
           </p>
         </div>
       </div>
 
       {/* Demonstration URL Test Buttons */}
-      <div className="space-y-3 p-4 bg-slate-900/60 rounded-xl border border-slate-800">
-        <p className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-          <Sparkles size={14} className="text-cyan-400" />
+      <div className="space-y-3 p-4 glass-strong rounded-2xl border border-white/18">
+        <p className="text-xs font-semibold text-white/80 flex items-center gap-1.5">
+          <Sparkles size={14} className="text-white" />
           <span>Demonstration Test URLs:</span>
         </p>
         <div className="flex flex-wrap gap-2">
@@ -132,10 +126,10 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
                 setUrlInput(sample.url);
                 setError(null);
               }}
-              className="px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-left cursor-pointer"
+              className="px-3 py-1.5 text-xs rounded-xl glass hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all text-left cursor-pointer"
             >
-              <span className="font-semibold text-cyan-300">{sample.label}</span>
-              <span className="text-[11px] text-slate-400 block font-mono truncate max-w-[280px]">
+              <span className="font-semibold text-white">{sample.label}</span>
+              <span className="text-[11px] text-white/50 block font-mono truncate max-w-[280px]">
                 {sample.url}
               </span>
             </button>
@@ -146,14 +140,14 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
       {/* Form Input */}
       <form onSubmit={handleAnalyze} className="space-y-4">
         {error && (
-          <div className="p-3 bg-rose-950/40 border border-rose-800 text-rose-300 text-xs rounded-lg flex items-center gap-2">
-            <ShieldAlert size={16} className="shrink-0" />
+          <div className="p-3.5 bg-white/10 border border-white/20 text-white text-xs rounded-xl flex items-center gap-2">
+            <ShieldAlert size={16} className="shrink-0 text-white" />
             <span>{error}</span>
           </div>
         )}
 
         <div className="space-y-2">
-          <label htmlFor="url-input" className="text-xs font-semibold text-slate-200 uppercase tracking-wider font-mono">
+          <label htmlFor="url-input" className="text-xs font-semibold text-white/80 uppercase tracking-wider font-mono">
             Untrusted URL / Web Link
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -163,20 +157,20 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               placeholder="e.g. http://sbi-kyc-update.top/login or https://bit.ly/cash-reward"
-              className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-500 font-mono"
+              className="flex-1 p-3.5 glass-input rounded-2xl text-sm font-mono focus:outline-none"
             />
             <div className="flex items-center gap-2">
               <button
                 type="submit"
                 disabled={isInspecting}
-                className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-xl transition-colors shadow-sm shadow-cyan-500/20 disabled:opacity-50 whitespace-nowrap cursor-pointer"
+                className="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-black bg-white hover:bg-white/90 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] disabled:opacity-50 whitespace-nowrap cursor-pointer"
               >
                 {isInspecting ? 'Inspecting...' : 'Analyse URL'}
               </button>
               <button
                 type="button"
                 onClick={handleClear}
-                className="px-4 py-3 text-xs font-semibold text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-xl transition-colors cursor-pointer"
+                className="p-3.5 text-xs font-semibold text-white glass hover:bg-white/15 border border-white/20 rounded-xl transition-all cursor-pointer"
               >
                 <RotateCcw size={15} />
               </button>
@@ -187,12 +181,12 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
 
       {/* Inspecting state */}
       {isInspecting && (
-        <div className="p-6 bg-slate-900 border border-cyan-500/30 rounded-xl text-center space-y-3">
-          <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin mx-auto" />
-          <p className="text-sm font-semibold text-slate-200 font-mono">
+        <div className="p-6 glass-strong rounded-2xl border border-white/20 text-center space-y-3">
+          <div className="w-8 h-8 rounded-full border-2 border-white border-t-transparent animate-spin mx-auto" />
+          <p className="text-sm font-semibold text-white font-mono">
             {progressMsg || 'Evaluating link structure...'}
           </p>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-white/50">
             Evaluating static URL tokens, TLD reputation, homoglyphs & syntax anomalies (no network calls)
           </p>
         </div>
@@ -200,17 +194,17 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
 
       {/* Detailed Analysis Result Display */}
       {result && !isInspecting && (
-        <div className="space-y-6 pt-4 border-t border-slate-800">
+        <div className="space-y-6 pt-4 border-t border-white/10">
           {/* Top Score Banner */}
-          <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 flex flex-col md:flex-row items-center gap-6">
+          <div className="p-6 glass-strong rounded-2xl border border-white/18 flex flex-col md:flex-row items-center gap-6">
             <ScoreCircle score={result.riskScore} level={result.riskLevel} />
             <div className="space-y-2 text-center md:text-left flex-1">
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
                 <RiskBadge level={result.riskLevel} size="lg" />
-                <span className="text-xs font-mono text-slate-400">
-                  Domain: <strong className="text-slate-200 font-mono">{result.domain}</strong>
+                <span className="text-xs font-mono text-white/60">
+                  Domain: <strong className="text-white font-mono">{result.domain}</strong>
                 </span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">
+                <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/10 text-white border border-white/20">
                   Static String Rules (Zero-Fetch)
                 </span>
               </div>
@@ -221,7 +215,7 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
                   ? 'Suspicious URL Structure - Exercise Caution'
                   : 'Domain Structure Appears Standard'}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
                 {result.summary}
               </p>
             </div>
@@ -229,7 +223,7 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
 
           {/* 7 Inspection Categories */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 font-mono">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-white/80 font-mono">
               7-Point Forensic Inspection Breakdown
             </h3>
 
@@ -237,42 +231,41 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
               {Object.entries(result.categories).map(([key, category]) => {
                 const isBad = category.status === 'dangerous';
                 const isWarning = category.status === 'suspicious';
-                const isSafe = category.status === 'safe';
 
                 return (
                   <div
                     key={key}
-                    className={`p-4 rounded-xl border space-y-2 text-xs transition-colors ${
+                    className={`p-4.5 rounded-2xl glass border space-y-2 text-xs transition-all ${
                       isBad
-                        ? 'bg-rose-950/20 border-rose-900/50'
+                        ? 'border-white/30 bg-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.3)]'
                         : isWarning
-                        ? 'bg-amber-950/20 border-amber-900/50'
-                        : 'bg-slate-900/50 border-slate-800'
+                        ? 'border-white/20 bg-white/5'
+                        : 'border-white/10 bg-transparent'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-slate-200 text-sm">
+                      <span className="font-semibold text-white text-sm">
                         {category.title}
                       </span>
                       <span
                         className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded border ${
                           isBad
-                            ? 'text-rose-400 border-rose-800 bg-rose-950/40'
+                            ? 'text-black bg-white border-white font-bold'
                             : isWarning
-                            ? 'text-amber-400 border-amber-800 bg-amber-950/40'
-                            : 'text-emerald-400 border-emerald-800 bg-emerald-950/40'
+                            ? 'text-white border-white/40 bg-white/10 font-medium'
+                            : 'text-white/60 border-white/20 bg-transparent'
                         }`}
                       >
                         {category.status}
                       </span>
                     </div>
 
-                    <p className="text-slate-400 leading-relaxed text-[11px]">
+                    <p className="text-white/60 leading-relaxed text-[11px]">
                       {category.detail}
                     </p>
 
                     {category.evidence && (
-                      <div className="pt-1 text-[11px] font-mono text-cyan-300">
+                      <div className="pt-1 text-[11px] font-mono text-white/90">
                         Evidence: {category.evidence}
                       </div>
                     )}
@@ -283,17 +276,17 @@ export const UrlSecurityChecker: React.FC<UrlSecurityCheckerProps> = () => {
           </div>
 
           {/* Verification Recommendations */}
-          <div className="p-5 bg-slate-900/80 rounded-xl border border-slate-800 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-mono">
+          <div className="p-5 glass-strong rounded-2xl border border-white/18 space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white/80 font-mono">
               Safe Handling Recommendations
             </h4>
             <div className="space-y-2">
               {result.recommendations.map((rec, i) => (
-                <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 size={16} className="text-cyan-400 shrink-0 mt-0.5" />
+                <div key={i} className="flex items-start gap-2.5 text-xs text-white/80">
+                  <CheckCircle2 size={16} className="text-white shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-white">{rec.action}: </span>
-                    <span className="text-slate-400">{rec.detail}</span>
+                    <span className="text-white/60">{rec.detail}</span>
                   </div>
                 </div>
               ))}

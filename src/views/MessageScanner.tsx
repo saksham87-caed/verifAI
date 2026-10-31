@@ -11,7 +11,6 @@ import {
   Phone,
   FileText,
   SplitSquareVertical,
-  CheckCircle2,
 } from 'lucide-react';
 import { MessageType, LanguageCode, MessageAnalysisResult, BackendSampleItem } from '../types/security';
 import { SAMPLE_MESSAGES, SampleMessage } from '../services/securityEngine';
@@ -26,7 +25,6 @@ interface MessageScannerProps {
 
 export const MessageScanner: React.FC<MessageScannerProps> = ({
   onScanComplete,
-  onOpenCompare,
 }) => {
   const [messageText, setMessageText] = useState('');
   const [senderName, setSenderName] = useState('');
@@ -55,7 +53,6 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
     });
 
     return () => {
-      // Abort any in-flight request when component unmounts
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
@@ -97,14 +94,13 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isScanning) return; // Prevent double-click submission
+    if (isScanning) return;
 
     if (!messageText.trim()) {
       setFormError('Please enter or paste the message text you wish to analyze.');
       return;
     }
 
-    // Cancel previous request if still running
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -145,7 +141,6 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
     }
   };
 
-  // Filter backend samples by selected tab
   const displayedSamples = backendSamples.length > 0
     ? backendSamples.filter((s) => {
         if (sampleTab === 'tricky_benign') return s.difficulty === 'tricky_benign' || s.expected_tier === 'SAFE';
@@ -155,34 +150,34 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
     : [];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto text-white/90">
       {/* Page Title & Mission */}
-      <div className="space-y-2 border-b border-slate-800 pb-6">
-        <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 bg-cyan-950/40 px-2.5 py-1 rounded border border-cyan-800/40">
+      <div className="space-y-2 border-b border-white/10 pb-6">
+        <div className="inline-flex items-center gap-2 text-xs font-mono text-white bg-white/10 px-3 py-1 rounded-full border border-white/20">
           <MessageSquareWarning size={14} />
           <span>Core Forensic Engine · Hybrid Rules + AI</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
           AI Message Security Scanner
         </h1>
-        <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
-          Paste any suspicious message and let TrustLens investigate its security signals. Supports English, Hindi (हिन्दी), and code-mixed Hinglish SMS.
+        <p className="text-sm text-white/60 max-w-2xl leading-relaxed">
+          Paste any suspicious message and let verifAI investigate its security signals. Supports English, Hindi (हिन्दी), and code-mixed Hinglish SMS.
         </p>
       </div>
 
       {/* Real-World Test Sample Buttons with Tabs */}
-      <div className="space-y-3 p-4 bg-slate-900/60 rounded-xl border border-slate-800">
+      <div className="space-y-3 p-4 glass-strong rounded-2xl border border-white/18">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <p className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-            <Sparkles size={14} className="text-cyan-400" />
+          <p className="text-xs font-semibold text-white/80 flex items-center gap-1.5">
+            <Sparkles size={14} className="text-white" />
             <span>Try Curated Examples (/api/samples):</span>
           </p>
-          <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800 text-[11px] font-mono">
+          <div className="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/10 text-[11px] font-mono">
             <button
               type="button"
               onClick={() => setSampleTab('threats')}
-              className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
-                sampleTab === 'threats' ? 'bg-rose-500/20 text-rose-300 font-bold' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                sampleTab === 'threats' ? 'bg-white text-black font-bold' : 'text-white/60 hover:text-white'
               }`}
             >
               High Threats
@@ -190,8 +185,8 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
             <button
               type="button"
               onClick={() => setSampleTab('tricky_benign')}
-              className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
-                sampleTab === 'tricky_benign' ? 'bg-emerald-500/20 text-emerald-300 font-bold' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                sampleTab === 'tricky_benign' ? 'bg-white text-black font-bold' : 'text-white/60 hover:text-white'
               }`}
             >
               Tricky Benign
@@ -199,8 +194,8 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
             <button
               type="button"
               onClick={() => setSampleTab('regional')}
-              className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
-                sampleTab === 'regional' ? 'bg-cyan-500/20 text-cyan-300 font-bold' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                sampleTab === 'regional' ? 'bg-white text-black font-bold' : 'text-white/60 hover:text-white'
               }`}
             >
               Hindi / Hinglish
@@ -215,13 +210,13 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
                 key={sample.id}
                 type="button"
                 onClick={() => handleSelectBackendSample(sample)}
-                className="px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-left cursor-pointer"
+                className="px-3 py-1.5 text-xs rounded-xl glass hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all text-left cursor-pointer"
                 title={sample.description}
               >
-                <span className={sample.expected_tier === 'SAFE' ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'}>
+                <span className="font-semibold text-white">
                   [{sample.expected_tier}]
                 </span>{' '}
-                <span className="font-mono text-slate-300">{sample.claimed_identity || sample.channel.toUpperCase()}</span>:{' '}
+                <span className="font-mono text-white/60">{sample.claimed_identity || sample.channel.toUpperCase()}</span>:{' '}
                 {sample.text.substring(0, 38)}...
               </button>
             ))
@@ -231,9 +226,9 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
                 key={sample.id}
                 type="button"
                 onClick={() => handleSelectSample(sample)}
-                className="px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-left cursor-pointer"
+                className="px-3 py-1.5 text-xs rounded-xl glass hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all text-left cursor-pointer"
               >
-                <span className="font-semibold text-cyan-300">[{sample.category}]</span> {sample.label}
+                <span className="font-semibold text-white">[{sample.category}]</span> {sample.label}
               </button>
             ))
           )}
@@ -243,9 +238,9 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
       {/* Main Analysis Form */}
       <form onSubmit={handleAnalyze} className="space-y-6">
         {formError && (
-          <div className="p-3 bg-rose-950/40 border border-rose-800 text-rose-300 text-xs rounded-lg flex items-center justify-between gap-2">
+          <div className="p-3.5 bg-white/10 border border-white/20 text-white text-xs rounded-xl flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <ShieldAlert size={16} className="shrink-0" />
+              <ShieldAlert size={16} className="shrink-0 text-white" />
               <span>{formError}</span>
             </div>
             <button
@@ -261,10 +256,10 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
         {/* Message Input Box */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label htmlFor="message-text" className="text-xs font-semibold text-slate-200 uppercase tracking-wider font-mono">
-              Suspicious Message Content <span className="text-rose-400">*</span>
+            <label htmlFor="message-text" className="text-xs font-semibold text-white/80 uppercase tracking-wider font-mono">
+              Suspicious Message Content <span className="text-white">*</span>
             </label>
-            <span className="text-[11px] font-mono text-slate-400">
+            <span className="text-[11px] font-mono text-white/40">
               {messageText.length} / 5000 characters
             </span>
           </div>
@@ -275,31 +270,31 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
             placeholder="Paste suspicious SMS, WhatsApp forward, bank warning, or email body here... (e.g., 'Dear SBI customer, your YONO account is suspended. Update Pan Card at http://sbi-kyc-update.top/login immediately')"
-            className="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 font-sans leading-relaxed transition-colors"
+            className="w-full p-4 glass-input rounded-2xl text-sm font-sans leading-relaxed focus:outline-none"
           />
         </div>
 
         {/* Multi-Metadata Strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-slate-900/40 border border-slate-800 rounded-xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 glass rounded-2xl border border-white/15">
           {/* Claimed Organisation */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Building size={14} className="text-slate-400" />
+            <label className="text-xs font-medium text-white/70 flex items-center gap-1.5">
+              <Building size={14} className="text-white/40" />
               <span>Claimed Identity</span>
             </label>
             <input
               type="text"
               value={claimedOrg}
               onChange={(e) => setClaimedOrg(e.target.value)}
-              placeholder="e.g. State Bank of India, India Post, CEO"
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              placeholder="e.g. State Bank of India, India Post"
+              className="w-full p-2.5 glass-input rounded-xl text-xs focus:outline-none"
             />
           </div>
 
           {/* Sender Header Name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <User size={14} className="text-slate-400" />
+            <label className="text-xs font-medium text-white/70 flex items-center gap-1.5">
+              <User size={14} className="text-white/40" />
               <span>Sender Header / Name</span>
             </label>
             <input
@@ -307,14 +302,14 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
               placeholder="e.g. VK-SBIINB, it-support@domain.com"
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              className="w-full p-2.5 glass-input rounded-xl text-xs focus:outline-none"
             />
           </div>
 
           {/* Sender Contact */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Phone size={14} className="text-slate-400" />
+            <label className="text-xs font-medium text-white/70 flex items-center gap-1.5">
+              <Phone size={14} className="text-white/40" />
               <span>Sender Phone / Email</span>
             </label>
             <input
@@ -322,20 +317,20 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
               value={senderContact}
               onChange={(e) => setSenderContact(e.target.value)}
               placeholder="e.g. +91 98451 20938"
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              className="w-full p-2.5 glass-input rounded-xl text-xs focus:outline-none"
             />
           </div>
 
           {/* Message Platform Type */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <FileText size={14} className="text-slate-400" />
+            <label className="text-xs font-medium text-white/70 flex items-center gap-1.5">
+              <FileText size={14} className="text-white/40" />
               <span>Platform</span>
             </label>
             <select
               value={messageType}
               onChange={(e) => setMessageType(e.target.value as MessageType)}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-100 focus:outline-none focus:border-cyan-500 cursor-pointer"
+              className="w-full p-2.5 glass-input rounded-xl text-xs focus:outline-none cursor-pointer bg-black/80"
             >
               <option value="sms">SMS Text Message</option>
               <option value="email">Email Content</option>
@@ -347,18 +342,18 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
 
         {/* Language selector & Disclaimer */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span className="font-semibold text-slate-300">Target Language:</span>
-            <div className="inline-flex rounded-lg p-1 bg-slate-900 border border-slate-800">
+          <div className="flex items-center gap-2 text-xs text-white/60">
+            <span className="font-semibold text-white/80">Target Language:</span>
+            <div className="inline-flex rounded-xl p-1 glass border border-white/15">
               {(['auto', 'en', 'hi'] as LanguageCode[]).map((lang) => (
                 <button
                   type="button"
                   key={lang}
                   onClick={() => setLanguage(lang)}
-                  className={`px-3 py-1 text-xs rounded transition-colors cursor-pointer ${
+                  className={`px-3 py-1 text-xs rounded-lg transition-all cursor-pointer ${
                     language === lang
-                      ? 'bg-cyan-500 text-slate-950 font-semibold'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-white text-black font-bold'
+                      : 'text-white/60 hover:text-white'
                   }`}
                 >
                   {lang === 'auto' ? 'Auto-Detect' : lang === 'en' ? 'English' : 'हिन्दी (Hindi)'}
@@ -367,18 +362,18 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
             </div>
           </div>
 
-          <p className="text-[11px] font-mono text-slate-400">
+          <p className="text-[11px] font-mono text-white/40">
             Static string analysis · PII redacted before AI evaluation
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-800">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
           <div className="flex items-center gap-3">
             <button
               type="submit"
               disabled={isScanning}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors shadow-lg shadow-cyan-500/20 disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-black bg-white hover:bg-white/90 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] disabled:opacity-50 cursor-pointer active:scale-95"
             >
               <Send size={15} />
               <span>{isScanning ? 'Analyzing...' : 'Analyse Message'}</span>
@@ -387,7 +382,7 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
             <button
               type="button"
               onClick={handleClear}
-              className="inline-flex items-center gap-2 px-5 py-3.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-3.5 text-xs font-semibold text-white glass hover:bg-white/15 border border-white/20 rounded-xl transition-all cursor-pointer"
             >
               <RotateCcw size={14} />
               <span>Clear Content</span>
@@ -404,9 +399,9 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
                 }
                 setIsCompareOpen(true);
               }}
-              className="inline-flex items-center gap-2 px-4 py-3.5 text-xs font-semibold text-cyan-300 hover:text-white bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-800/60 rounded-lg transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-3.5 text-xs font-semibold text-white glass hover:bg-white/15 border border-white/20 rounded-xl transition-all cursor-pointer"
             >
-              <SplitSquareVertical size={14} className="text-cyan-400" />
+              <SplitSquareVertical size={14} className="text-white" />
               <span>Compare with Naive Baseline</span>
             </button>
           </div>
@@ -414,13 +409,13 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
       </form>
 
       {/* Safety & Defensive Policy Banner */}
-      <div className="p-4 bg-slate-900/40 border border-slate-800 rounded-xl text-xs text-slate-400 space-y-2">
-        <div className="flex items-center gap-2 text-slate-300 font-semibold">
-          <Info size={16} className="text-cyan-400" />
+      <div className="p-4 glass rounded-2xl border border-white/15 text-xs text-white/60 space-y-2">
+        <div className="flex items-center gap-2 text-white font-semibold">
+          <Info size={16} className="text-white" />
           <span>Defensive Privacy & Isolation Guarantee</span>
         </div>
-        <p className="text-slate-400 text-[11px] leading-relaxed">
-          TrustLens treats all message text as untrusted data. Links are analyzed purely as static strings without resolving DNS or fetching servers. Phone numbers, emails, Aadhaar numbers, and OTPs are redacted prior to AI evaluation.
+        <p className="text-white/50 text-[11px] leading-relaxed">
+          verifAI treats all message text as untrusted data. Links are analyzed purely as static strings without resolving DNS or fetching servers. Phone numbers, emails, Aadhaar numbers, and OTPs are redacted prior to AI evaluation.
         </p>
       </div>
 

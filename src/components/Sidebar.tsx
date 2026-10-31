@@ -33,11 +33,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
   ];
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-950 border-r border-slate-800/80 hidden md:flex flex-col justify-between p-4 min-h-[calc(100vh-4rem)]">
+    <aside className="w-64 shrink-0 glass rounded-none border-r border-white/10 border-t-0 border-b-0 border-l-0 hidden md:flex flex-col justify-between p-4 min-h-[calc(100vh-4rem)]">
       <div className="space-y-6">
         {/* Workspace Kicker */}
         <div className="px-3 pt-1">
-          <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
+          <p className="text-[11px] font-mono uppercase tracking-wider text-white/40 font-semibold">
             Security Operations
           </p>
         </div>
@@ -51,13 +51,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all text-left ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all text-left cursor-pointer ${
                   isActive
-                    ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent'
+                    ? 'bg-white/12 text-white border border-white/30 shadow-[0_2px_10px_rgba(0,0,0,0.3)]'
+                    : 'text-white/55 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <Icon size={16} className={isActive ? 'text-cyan-400' : 'text-slate-500'} />
+                <Icon size={16} className={isActive ? 'text-white' : 'text-white/40'} />
                 <span>{item.label}</span>
               </button>
             );
@@ -65,8 +65,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
         </nav>
 
         {/* Knowledge & Protocol */}
-        <div className="pt-2 border-t border-slate-900 space-y-1">
-          <p className="px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
+        <div className="pt-3 border-t border-white/10 space-y-1">
+          <p className="px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white/40 font-semibold">
             Knowledge & Principles
           </p>
           {secondaryNavItems.map((item) => {
@@ -76,13 +76,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all text-left ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all text-left cursor-pointer ${
                   isActive
-                    ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent'
+                    ? 'bg-white/12 text-white border border-white/30 shadow-[0_2px_10px_rgba(0,0,0,0.3)]'
+                    : 'text-white/55 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <Icon size={16} className={isActive ? 'text-cyan-400' : 'text-slate-500'} />
+                <Icon size={16} className={isActive ? 'text-white' : 'text-white/40'} />
                 <span>{item.label}</span>
               </button>
             );
@@ -91,12 +91,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
       </div>
 
       {/* Defensive Shield Reminder */}
-      <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 text-[11px] text-slate-400 space-y-1.5">
-        <div className="flex items-center gap-2 text-slate-300 font-semibold">
-          <ShieldAlert size={14} className="text-cyan-400" />
+      <div className="p-3 bg-white/[0.04] rounded-xl border border-white/10 text-[11px] text-white/60 space-y-1.5">
+        <div className="flex items-center gap-2 text-white font-semibold">
+          <ShieldAlert size={14} className="text-white" />
           <span>Defensive Shield Active</span>
         </div>
-        <p className="text-slate-500 leading-relaxed">
+        <p className="text-white/45 leading-relaxed">
           Untrusted text inspection only. Links are never automatically visited or executed.
         </p>
       </div>

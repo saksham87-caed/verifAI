@@ -4,17 +4,11 @@ import {
   ShieldCheck,
   AlertTriangle,
   FileText,
-  TrendingUp,
   ArrowRight,
-  Filter,
   ExternalLink,
   Info,
-  Clock,
   Sparkles,
-  Languages,
-  CheckCircle2,
   RefreshCw,
-  Activity,
 } from 'lucide-react';
 import { RiskBadge } from '../components/RiskBadge';
 import { historyManager } from '../services/securityEngine';
@@ -62,7 +56,6 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
   useEffect(() => {
     checkStatus();
     loadStats();
-    // Poll every 30 seconds
     const interval = setInterval(() => {
       checkStatus();
       loadStats();
@@ -80,10 +73,8 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
   const mediumPercent = totalScans ? Math.round((mediumRiskCount / totalScans) * 100) : 0;
   const lowPercent = totalScans ? Math.round((lowRiskCount / totalScans) * 100) : 0;
 
-  // Real top signals from backend or local scans, never fabricated numbers
   const topSignals = backendStats?.top_signals || [];
 
-  // Curated National Cyber Advisories (Clearly labeled as educational guidance)
   const securityAlerts = [
     {
       id: 'alert-1',
@@ -109,35 +100,35 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
   ];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl mx-auto text-white/90">
       {/* Top Banner: Real-time Telemetry & Privacy Notice */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-400">
-        <div className="flex items-center gap-2">
-          <Info size={16} className="text-cyan-400 shrink-0" />
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 glass border border-white/15 rounded-2xl text-xs text-white/70">
+        <div className="flex items-center gap-2.5">
+          <Info size={16} className="text-white shrink-0" />
           <span>
-            <strong className="text-slate-200">Defensive Cybersecurity Operations:</strong> Real-time anonymized telemetry across SMS and Email vectors. All links are analyzed statically. Messages are not retained.
+            <strong className="text-white">Defensive Cybersecurity Operations:</strong> Real-time anonymized telemetry across SMS and Email vectors. All links are analyzed statically. Messages are not retained.
           </span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           {connectionStatus === 'connected' ? (
-            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/40">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-white bg-white/10 px-3 py-1 rounded-full border border-white/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
               Backend API: {llmConfigured ? 'Connected (Gemini + Rules)' : 'Connected (Rules-Only)'}
             </span>
           ) : connectionStatus === 'checking' ? (
-            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded border border-amber-800/40">
-              <RefreshCw size={11} className="animate-spin text-amber-400" />
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-white/70 bg-white/5 px-3 py-1 rounded-full border border-white/15">
+              <RefreshCw size={11} className="animate-spin text-white" />
               Checking API...
             </span>
           ) : (
             <div className="flex items-center gap-1.5">
-              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded border border-rose-800/40">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-white/60 bg-white/5 px-3 py-1 rounded-full border border-white/15">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
                 Backend API: Offline
               </span>
               <button
                 onClick={checkStatus}
-                className="px-2 py-0.5 text-[10px] rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 cursor-pointer"
+                className="px-2.5 py-0.5 text-[10px] rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 cursor-pointer"
               >
                 Retry
               </button>
@@ -152,14 +143,14 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
           <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Security Intelligence Dashboard
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-white/60 mt-1">
             Real-time threat monitoring, risk distribution, multilingual telemetry, and detected social engineering patterns.
           </p>
         </div>
 
         <button
           onClick={onOpenScanner}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors whitespace-nowrap shadow-sm shadow-cyan-500/20 cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black bg-white hover:bg-white/90 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] whitespace-nowrap cursor-pointer active:scale-95"
         >
           <Sparkles size={14} />
           <span>Analyse New Message</span>
@@ -169,79 +160,79 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
       {/* Top Metric Cards Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Message Scanner Count */}
-        <div className="p-4 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/15 space-y-2">
+          <div className="flex items-center justify-between text-white/60 text-xs">
             <span>Message Scans</span>
-            <FileText size={15} className="text-cyan-400" />
+            <FileText size={15} className="text-white" />
           </div>
           <p className="text-2xl font-extrabold text-white font-mono tabular-nums">
             {scans.filter((s) => s.type === 'sms' || s.type === 'email' || s.type === 'whatsapp' || s.type === 'other').length}
           </p>
-          <p className="text-[10px] text-slate-400">SMS, Email & WhatsApp</p>
+          <p className="text-[10px] text-white/40">SMS, Email & WhatsApp</p>
         </div>
 
         {/* Link Inspector Count */}
-        <div className="p-4 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/15 space-y-2">
+          <div className="flex items-center justify-between text-white/60 text-xs">
             <span>Link Inspections</span>
-            <FileText size={15} className="text-blue-400" />
+            <FileText size={15} className="text-white" />
           </div>
           <p className="text-2xl font-extrabold text-white font-mono tabular-nums">
             {scans.filter((s) => s.type === 'url').length}
           </p>
-          <p className="text-[10px] text-slate-400">Untrusted URLs checked</p>
+          <p className="text-[10px] text-white/40">Untrusted URLs checked</p>
         </div>
 
         {/* Identity Trust Count */}
-        <div className="p-4 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/15 space-y-2">
+          <div className="flex items-center justify-between text-white/60 text-xs">
             <span>Identity Checks</span>
-            <FileText size={15} className="text-indigo-400" />
+            <FileText size={15} className="text-white" />
           </div>
           <p className="text-2xl font-extrabold text-white font-mono tabular-nums">
             {scans.filter((s) => s.type === 'identity').length}
           </p>
-          <p className="text-[10px] text-slate-400">Sender & org provenance</p>
+          <p className="text-[10px] text-white/40">Sender & org provenance</p>
         </div>
 
         {/* High-Risk Detected */}
-        <div className="p-4 bg-slate-900/80 rounded-xl border border-rose-900/30 space-y-2">
-          <div className="flex items-center justify-between text-rose-400 text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/25 space-y-2 shadow-[0_0_15px_rgba(255,255,255,0.08)]">
+          <div className="flex items-center justify-between text-white text-xs font-semibold">
             <span>High-Risk</span>
-            <ShieldAlert size={15} className="text-rose-400" />
+            <ShieldAlert size={15} className="text-white" />
           </div>
-          <p className="text-2xl font-extrabold text-rose-400 font-mono tabular-nums">
+          <p className="text-2xl font-extrabold text-white font-mono tabular-nums">
             {highRiskCount}
           </p>
-          <p className="text-[10px] text-rose-300/70 font-mono">
+          <p className="text-[10px] text-white/60 font-mono">
             {highPercent}% of total
           </p>
         </div>
 
         {/* Medium-Risk Detected */}
-        <div className="p-4 bg-slate-900/80 rounded-xl border border-amber-900/30 space-y-2">
-          <div className="flex items-center justify-between text-amber-400 text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/20 space-y-2">
+          <div className="flex items-center justify-between text-white/80 text-xs font-semibold">
             <span>Suspicious</span>
-            <AlertTriangle size={15} className="text-amber-400" />
+            <AlertTriangle size={15} className="text-white/80" />
           </div>
-          <p className="text-2xl font-extrabold text-amber-400 font-mono tabular-nums">
+          <p className="text-2xl font-extrabold text-white/90 font-mono tabular-nums">
             {mediumRiskCount}
           </p>
-          <p className="text-[10px] text-amber-300/70 font-mono">
+          <p className="text-[10px] text-white/50 font-mono">
             {mediumPercent}% of total
           </p>
         </div>
 
         {/* Low-Risk Verified */}
-        <div className="p-4 bg-slate-900/80 rounded-xl border border-emerald-900/30 space-y-2">
-          <div className="flex items-center justify-between text-emerald-400 text-xs">
+        <div className="p-4 glass rounded-2xl border border-white/15 space-y-2">
+          <div className="flex items-center justify-between text-white/60 text-xs">
             <span>Safe / Low</span>
-            <ShieldCheck size={15} className="text-emerald-400" />
+            <ShieldCheck size={15} className="text-white/60" />
           </div>
-          <p className="text-2xl font-extrabold text-emerald-400 font-mono tabular-nums">
+          <p className="text-2xl font-extrabold text-white/80 font-mono tabular-nums">
             {lowRiskCount}
           </p>
-          <p className="text-[10px] text-emerald-300/70 font-mono">
+          <p className="text-[10px] text-white/40 font-mono">
             {lowPercent}% of total
           </p>
         </div>
@@ -250,60 +241,60 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
       {/* Middle Section: Risk Distribution Chart + Top Forensic Signals */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Risk Distribution Chart (Left 5 cols) */}
-        <div className="lg:col-span-5 p-6 bg-slate-900/90 rounded-xl border border-slate-800 space-y-6">
+        <div className="lg:col-span-5 p-6 glass-strong rounded-2xl border border-white/18 space-y-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-base font-bold text-white">Risk Distribution</h2>
-              <p className="text-xs text-slate-400">Proportional threat breakdown</p>
+              <p className="text-xs text-white/50">Proportional threat breakdown</p>
             </div>
-            <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/40">
+            <span className="text-xs font-mono text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">
               Deterministic Rules
             </span>
           </div>
 
           {/* Visual Bar Stack Breakdown */}
           <div className="space-y-3">
-            <div className="h-4 w-full bg-slate-800 rounded-full overflow-hidden flex">
+            <div className="h-4 w-full bg-white/10 rounded-full overflow-hidden flex p-0.5 border border-white/10">
               <div
                 style={{ width: `${highPercent}%` }}
-                className="bg-rose-500 h-full transition-all duration-500"
+                className="bg-white h-full rounded-l-full transition-all duration-500 shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                 title={`High Risk: ${highPercent}%`}
               />
               <div
                 style={{ width: `${mediumPercent}%` }}
-                className="bg-amber-500 h-full transition-all duration-500"
+                className="bg-white/60 h-full transition-all duration-500 border-l border-r border-black/20"
                 title={`Medium Risk: ${mediumPercent}%`}
               />
               <div
                 style={{ width: `${lowPercent}%` }}
-                className="bg-emerald-500 h-full transition-all duration-500"
+                className="bg-white/20 h-full rounded-r-full transition-all duration-500"
                 title={`Low Risk: ${lowPercent}%`}
               />
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center text-xs pt-2">
-              <div className="p-2.5 rounded-lg bg-rose-950/30 border border-rose-900/40">
-                <span className="text-[10px] uppercase font-mono text-rose-300 block">High Risk</span>
-                <span className="text-lg font-bold text-rose-400 font-mono tabular-nums">{highPercent}%</span>
+              <div className="p-3 rounded-xl bg-white/15 border border-white/25">
+                <span className="text-[10px] uppercase font-mono text-white/70 block">High Risk</span>
+                <span className="text-lg font-bold text-white font-mono tabular-nums">{highPercent}%</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-amber-950/30 border border-amber-900/40">
-                <span className="text-[10px] uppercase font-mono text-amber-300 block">Suspicious</span>
-                <span className="text-lg font-bold text-amber-400 font-mono tabular-nums">{mediumPercent}%</span>
+              <div className="p-3 rounded-xl bg-white/10 border border-white/20">
+                <span className="text-[10px] uppercase font-mono text-white/60 block">Suspicious</span>
+                <span className="text-lg font-bold text-white/90 font-mono tabular-nums">{mediumPercent}%</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-900/40">
-                <span className="text-[10px] uppercase font-mono text-emerald-300 block">Safe</span>
-                <span className="text-lg font-bold text-emerald-400 font-mono tabular-nums">{lowPercent}%</span>
+              <div className="p-3 rounded-xl bg-white/5 border border-white/15">
+                <span className="text-[10px] uppercase font-mono text-white/50 block">Safe</span>
+                <span className="text-lg font-bold text-white/80 font-mono tabular-nums">{lowPercent}%</span>
               </div>
             </div>
           </div>
 
           {/* Official Government of India Cybercrime Portal Banner */}
-          <div className="p-4 bg-gradient-to-r from-cyan-950/60 to-slate-950/80 border border-cyan-800/60 rounded-xl space-y-2 text-xs">
-            <div className="flex items-center gap-2 text-cyan-400 font-bold font-mono text-[11px] uppercase">
+          <div className="p-4 glass rounded-xl border border-white/20 space-y-2 text-xs">
+            <div className="flex items-center gap-2 text-white font-bold font-mono text-[11px] uppercase">
               <ShieldCheck size={14} />
               <span>Report Cyber Crime — Government of India</span>
             </div>
-            <p className="text-slate-300 text-xs leading-relaxed">
+            <p className="text-white/70 text-xs leading-relaxed">
               Visit the official National Cyber Crime Reporting Portal to report cybercrime incidents.
             </p>
             <div className="pt-1">
@@ -311,7 +302,7 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
                 href="https://cybercrime.gov.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-white/90 transition-colors cursor-pointer"
               >
                 <span>Visit cybercrime.gov.in</span>
                 <ExternalLink size={13} />
@@ -321,9 +312,9 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
 
           {/* Adjudication Feedback Stats */}
           {backendStats && (
-            <div className="p-3 bg-slate-950/50 rounded-lg border border-slate-800 flex items-center justify-between text-xs font-mono">
-              <span className="text-slate-400">User Challenges Logged:</span>
-              <span className="text-cyan-300 font-bold">
+            <div className="p-3 glass rounded-xl border border-white/10 flex items-center justify-between text-xs font-mono">
+              <span className="text-white/50">User Challenges Logged:</span>
+              <span className="text-white font-bold">
                 {backendStats.feedback_counts.false_positive} FP / {backendStats.feedback_counts.correct} Verified
               </span>
             </div>
@@ -331,13 +322,13 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
         </div>
 
         {/* Commonly Detected Scam Techniques & Top Signals (Right 7 cols) */}
-        <div className="lg:col-span-7 p-6 bg-slate-900/90 rounded-xl border border-slate-800 space-y-4">
+        <div className="lg:col-span-7 p-6 glass-strong rounded-2xl border border-white/18 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-base font-bold text-white">
                 Top Forensic Security Signals
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-white/50">
                 Deterministic detection vectors identifying active deception and credential theft
               </p>
             </div>
@@ -348,27 +339,27 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
               topSignals.map((sig, i) => (
                 <div
                   key={sig.id || i}
-                  className="p-3.5 rounded-lg bg-slate-950/50 border border-slate-800/80 hover:border-slate-700 transition-colors flex items-center justify-between gap-3 text-xs"
+                  className="p-3.5 rounded-xl glass border border-white/15 hover:border-white/30 transition-all flex items-center justify-between gap-3 text-xs"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-slate-200">{sig.label}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-cyan-400 border border-cyan-800/40">
+                      <span className="font-semibold text-white">{sig.label}</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/90 border border-white/20">
                         {sig.id}
                       </span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 shrink-0 font-mono">
-                    <span className="text-cyan-400 font-bold">{sig.count}</span>
-                    <span className="text-[10px] text-slate-400">occurrences</span>
+                    <span className="text-white font-bold">{sig.count}</span>
+                    <span className="text-[10px] text-white/40">occurrences</span>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="p-8 rounded-lg bg-slate-950/40 border border-slate-800/60 text-center space-y-2">
-                <FileText size={24} className="text-slate-600 mx-auto" />
-                <p className="text-xs text-slate-300 font-medium">No signals recorded in live telemetry yet</p>
-                <p className="text-[11px] text-slate-500 max-w-sm mx-auto">
+              <div className="p-8 rounded-xl glass border border-white/10 text-center space-y-2">
+                <FileText size={24} className="text-white/30 mx-auto" />
+                <p className="text-xs text-white/80 font-medium">No signals recorded in live telemetry yet</p>
+                <p className="text-[11px] text-white/50 max-w-sm mx-auto">
                   Analyze messages via the Scanner to populate aggregated signal distribution in real-time.
                 </p>
               </div>
@@ -380,15 +371,15 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
       {/* Bottom Section: Recent Scan Activity + Recent Security Alerts */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Recent Scan Activity (8 cols) */}
-        <div className="lg:col-span-8 p-6 bg-slate-900/90 rounded-xl border border-slate-800 space-y-4">
+        <div className="lg:col-span-8 p-6 glass-strong rounded-2xl border border-white/18 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-base font-bold text-white">Recent Scan Activity</h2>
-              <p className="text-xs text-slate-400">Last processed security assessments</p>
+              <p className="text-xs text-white/50">Last processed security assessments</p>
             </div>
             <button
               onClick={() => onNavigate('scan-history')}
-              className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 cursor-pointer"
+              className="text-xs font-semibold text-white hover:text-white/80 flex items-center gap-1 cursor-pointer"
             >
               <span>View Full History</span>
               <ArrowRight size={14} />
@@ -398,7 +389,7 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-[11px] font-mono uppercase text-slate-400">
+                <tr className="border-b border-white/10 text-[11px] font-mono uppercase text-white/40">
                   <th className="py-2.5 px-3">Type</th>
                   <th className="py-2.5 px-3">Target Subject</th>
                   <th className="py-2.5 px-3">Risk Assessment</th>
@@ -406,31 +397,28 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
                   <th className="py-2.5 px-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-sans">
+              <tbody className="divide-y divide-white/10 font-sans">
                 {scans.slice(0, 5).map((scan) => (
-                  <tr key={scan.id} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="py-3 px-3 font-mono uppercase text-[11px] text-slate-400">
+                  <tr key={scan.id} className="hover:bg-white/5 transition-colors">
+                    <td className="py-3 px-3 font-mono uppercase text-[11px] text-white/50">
                       {scan.type}
                     </td>
                     <td className="py-3 px-3">
-                      <p className="font-medium text-slate-200 line-clamp-1">{scan.title}</p>
-                      <p className="text-[11px] text-slate-400 line-clamp-1">{scan.preview}</p>
+                      <p className="font-medium text-white line-clamp-1">{scan.title}</p>
+                      <p className="text-[11px] text-white/50 line-clamp-1">{scan.preview}</p>
                     </td>
                     <td className="py-3 px-3">
                       <RiskBadge level={scan.riskLevel} size="sm" />
                     </td>
                     <td className="py-3 px-3 text-right font-mono font-bold tabular-nums">
-                      <span className={
-                        scan.riskLevel === 'HIGH' ? 'text-rose-400' :
-                        scan.riskLevel === 'MEDIUM' ? 'text-amber-400' : 'text-emerald-400'
-                      }>
+                      <span className="text-white">
                         {scan.riskScore}/100
                       </span>
                     </td>
                     <td className="py-3 px-3 text-right">
                       <button
                         onClick={() => onNavigate('analysis-results', scan.data)}
-                        className="text-cyan-400 hover:text-cyan-300 font-semibold cursor-pointer whitespace-nowrap"
+                        className="text-white hover:underline font-semibold cursor-pointer whitespace-nowrap"
                       >
                         Inspect
                       </button>
@@ -443,24 +431,24 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
         </div>
 
         {/* Recent Security Alerts (4 cols) */}
-        <div className="lg:col-span-4 p-6 bg-slate-900/90 rounded-xl border border-slate-800 space-y-4">
+        <div className="lg:col-span-4 p-6 glass-strong rounded-2xl border border-white/18 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-base font-bold text-white">Live Threat Alerts</h2>
-            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           </div>
 
           <div className="space-y-3">
             {securityAlerts.map((alert) => (
               <div
                 key={alert.id}
-                className="p-3 rounded-lg bg-slate-950/60 border border-slate-800 space-y-2 text-xs"
+                className="p-3.5 rounded-xl glass border border-white/15 space-y-2 text-xs"
               >
-                <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                <div className="flex items-center justify-between text-[10px] font-mono text-white/40">
                   <span>{alert.date}</span>
                   <RiskBadge level={alert.severity} size="sm" />
                 </div>
-                <h3 className="font-semibold text-slate-200 leading-snug">{alert.title}</h3>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <h3 className="font-semibold text-white leading-snug">{alert.title}</h3>
+                <p className="text-[11px] text-white/60 leading-relaxed">
                   {alert.summary}
                 </p>
               </div>
@@ -470,7 +458,7 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
           <div className="pt-2">
             <button
               onClick={() => onNavigate('awareness-centre')}
-              className="w-full py-2.5 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors text-center cursor-pointer"
+              className="w-full py-2.5 px-3 rounded-xl glass hover:bg-white/15 text-xs font-semibold text-white transition-all text-center cursor-pointer border border-white/15"
             >
               Explore Awareness Guide
             </button>

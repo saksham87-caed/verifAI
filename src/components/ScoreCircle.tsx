@@ -18,14 +18,32 @@ export const ScoreCircle: React.FC<ScoreCircleProps> = ({
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
-  const colorMap: Record<RiskLevel, { stroke: string; glow: string; text: string }> = {
-    HIGH: { stroke: '#f43f5e', glow: 'rgba(244, 63, 94, 0.25)', text: 'text-rose-400' },
-    MEDIUM: { stroke: '#f59e0b', glow: 'rgba(245, 158, 11, 0.25)', text: 'text-amber-400' },
-    LOW: { stroke: '#10b981', glow: 'rgba(16, 185, 129, 0.25)', text: 'text-emerald-400' },
-    UNVERIFIED: { stroke: '#64748b', glow: 'rgba(100, 116, 139, 0.2)', text: 'text-slate-400' },
+  const styleMap: Record<RiskLevel, { stroke: string; glow: string; text: string; dashPattern?: string }> = {
+    HIGH: {
+      stroke: '#ffffff',
+      glow: 'rgba(255, 255, 255, 0.4)',
+      text: 'text-white font-extrabold',
+    },
+    MEDIUM: {
+      stroke: '#ffffff',
+      glow: 'rgba(255, 255, 255, 0.25)',
+      text: 'text-white/90 font-bold',
+      dashPattern: '8,4',
+    },
+    LOW: {
+      stroke: 'rgba(255, 255, 255, 0.65)',
+      glow: 'rgba(255, 255, 255, 0.15)',
+      text: 'text-white/80 font-semibold',
+    },
+    UNVERIFIED: {
+      stroke: 'rgba(255, 255, 255, 0.35)',
+      glow: 'transparent',
+      text: 'text-white/50 font-normal',
+      dashPattern: '3,4',
+    },
   };
 
-  const colors = colorMap[level] || colorMap.UNVERIFIED;
+  const currentStyle = styleMap[level] || styleMap.UNVERIFIED;
 
   return (
     <div
@@ -40,7 +58,7 @@ export const ScoreCircle: React.FC<ScoreCircleProps> = ({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#1e293b"
+          stroke="rgba(255, 255, 255, 0.1)"
           strokeWidth={strokeWidth}
           fill="transparent"
         />
@@ -49,24 +67,24 @@ export const ScoreCircle: React.FC<ScoreCircleProps> = ({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke={colors.stroke}
+          stroke={currentStyle.stroke}
           strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
+          strokeDasharray={currentStyle.dashPattern || circumference}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
           fill="transparent"
           style={{
             transition: 'stroke-dashoffset 1s ease-in-out',
-            filter: `drop-shadow(0 0 6px ${colors.glow})`,
+            filter: currentStyle.glow !== 'transparent' ? `drop-shadow(0 0 8px ${currentStyle.glow})` : 'none',
           }}
         />
       </svg>
       {/* Centered Score */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <span className={`text-3xl font-extrabold font-mono tabular-nums tracking-tight ${colors.text}`}>
+        <span className={`text-3xl font-mono tabular-nums tracking-tight ${currentStyle.text}`}>
           {score}
         </span>
-        <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400">
+        <span className="text-[10px] uppercase font-mono tracking-wider text-white/40">
           Risk Score
         </span>
       </div>

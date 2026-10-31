@@ -117,7 +117,7 @@ const feedbackLimiter = createLimiter(
 const generalApiLimiter = createLimiter(
   60 * 1000,
   120,
-  'Too many requests to the TrustLens API. Please slow down.'
+  'Too many requests to the verifAI API. Please slow down.'
 );
 
 app.use('/api', generalApiLimiter);
@@ -292,16 +292,16 @@ app.post('/api/compare', compareLimiter, (req: Request, res: Response, next: Nex
     let comparison_insight = '';
     if (naiveResult.tier === 'HIGH_RISK' && ruleResult.risk_tier === 'SAFE') {
       comparison_insight =
-        'The naive keyword filter triggered a FALSE POSITIVE because it matched words like "bank" or "verify". TrustLens recognized legitimate DLT headers, absence of untrusted URLs, and benign context.';
+        'The naive keyword filter triggered a FALSE POSITIVE because it matched words like "bank" or "verify". verifAI recognized legitimate DLT headers, absence of untrusted URLs, and benign context.';
     } else if (naiveResult.tier === 'SAFE' && ruleResult.risk_tier === 'HIGH_RISK') {
       comparison_insight =
-        'The naive keyword filter MISSED this attack (False Negative) because the message used a polite, non-urgent tone. TrustLens successfully detected lookalike domains and credential solicitation.';
+        'The naive keyword filter MISSED this attack (False Negative) because the message used a polite, non-urgent tone. verifAI successfully detected lookalike domains and credential solicitation.';
     } else if (ruleResult.risk_tier === 'HIGH_RISK') {
       comparison_insight =
-        'Both flagged the message, but TrustLens provides exact evidence offsets, cites lookalike domain mechanics, and provides actionable verification guidance.';
+        'Both flagged the message, but verifAI provides exact evidence offsets, cites lookalike domain mechanics, and provides actionable verification guidance.';
     } else {
       comparison_insight =
-        'Both evaluated the message as low risk, but TrustLens verified institutional domain provenance rather than just scanning for keywords.';
+        'Both evaluated the message as low risk, but verifAI verified institutional domain provenance rather than just scanning for keywords.';
     }
 
     const comparePayload: CompareResponse = {
@@ -408,7 +408,7 @@ async function startServer() {
 }
 
 startServer().catch((err) => {
-  secLog.error('Failed to start TrustLens server', {
+  secLog.error('Failed to start verifAI server', {
     event: 'startup_failure',
     errorCode: err?.code || 'STARTUP_ERROR',
   });

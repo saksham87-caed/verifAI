@@ -1,6 +1,7 @@
 import React from 'react';
-import { Shield, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { SupportedLanguage } from '../i18n/translations';
+import { Logo } from './Logo';
 
 interface NavbarProps {
   currentView: string;
@@ -13,8 +14,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onNavigate,
-  language,
-  onLanguageChange,
   onOpenQuickScan,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -29,38 +28,41 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80">
+    <header className="sticky top-0 z-40 glass-strong border-b border-white/10 rounded-none backdrop-blur-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
-        {/* Zone 1: Brand Title (One-line wordmark) */}
+        {/* Zone 1: Brand Title */}
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => onNavigate('landing')}
-            className="flex items-center gap-2.5 text-left group focus:outline-none"
+            className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
           >
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 group-hover:border-cyan-400 transition-colors">
-              <Shield size={18} />
+            <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] flex items-center justify-center text-white group-hover:border-white/40 group-hover:bg-white/15 transition-all">
+              <Logo size={18} />
             </div>
-            <span className="text-lg font-extrabold tracking-wider text-slate-100 whitespace-nowrap font-mono">
-              TRUSTLENS<span className="text-cyan-400">.AI</span>
+            <span className="text-xl tracking-tight text-white font-sans whitespace-nowrap">
+              verif<b className="font-extrabold text-white">AI</b>
             </span>
           </button>
         </div>
 
         {/* Zone 2: Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-400">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => onNavigate(link.id)}
-              className={`whitespace-nowrap transition-colors hover:text-slate-100 ${
-                currentView === link.id
-                  ? 'text-cyan-400 font-semibold'
-                  : 'text-slate-400'
-              }`}
-            >
-              {link.label}
-            </button>
-          ))}
+        <nav className="hidden lg:flex items-center gap-1.5 text-xs font-medium text-white/60">
+          {navLinks.map((link) => {
+            const isActive = currentView === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => onNavigate(link.id)}
+                className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-all cursor-pointer ${
+                  isActive
+                    ? 'bg-white/12 border border-white/30 text-white font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.3)]'
+                    : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'
+                }`}
+              >
+                {link.label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Zone 3: Primary CTA */}
@@ -68,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Primary Action Button */}
           <button
             onClick={onOpenQuickScan}
-            className="hidden sm:inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors whitespace-nowrap shadow-sm shadow-cyan-500/20"
+            className="hidden sm:inline-flex items-center px-4 py-2 text-xs font-bold uppercase tracking-wider text-black bg-white/90 hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.35)] rounded-lg transition-all whitespace-nowrap cursor-pointer active:scale-95"
           >
             Scan Message
           </button>
@@ -76,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-400 hover:text-slate-100 focus:outline-none"
+            className="lg:hidden p-2 text-white/70 hover:text-white focus:outline-none cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -86,7 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-2 pb-5 space-y-2">
+        <div className="lg:hidden border-b border-white/10 glass-strong rounded-none px-4 pt-2 pb-5 space-y-2">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -94,10 +96,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onNavigate(link.id);
                 setMobileMenuOpen(false);
               }}
-              className={`w-full text-left py-2 px-3 rounded-md text-sm ${
+              className={`w-full text-left py-2 px-3 rounded-lg text-sm transition-all cursor-pointer ${
                 currentView === link.id
-                  ? 'bg-slate-800/80 text-cyan-400 font-semibold'
-                  : 'text-slate-300 hover:bg-slate-900'
+                  ? 'bg-white/12 border border-white/30 text-white font-semibold'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white'
               }`}
             >
               {link.label}
@@ -109,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onOpenQuickScan();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-2.5 text-center text-xs font-semibold uppercase tracking-wider text-slate-950 bg-cyan-400 rounded-lg"
+              className="w-full py-2.5 text-center text-xs font-bold uppercase tracking-wider text-black bg-white/90 rounded-lg hover:bg-white"
             >
               Scan a Suspicious Message
             </button>
