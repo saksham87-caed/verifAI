@@ -65,7 +65,7 @@ export interface Translations {
 export const translations: Record<SupportedLanguage, Translations> = {
   en: {
     appName: 'VERIFAI',
-    tagline: "Don't Trust the Message. Verify the Identity.",
+    tagline: 'Your message is guilty until verified.',
     subTagline: 'Your AI-powered shield against phishing, impersonation and digital deception.',
     nav: {
       home: 'Home',
@@ -79,7 +79,7 @@ export const translations: Record<SupportedLanguage, Translations> = {
       quickScan: 'Analyse New Message',
     },
     hero: {
-      headline: 'One Message Can Cost You Everything. Verify Before You Trust.',
+      headline: 'Trust Nothing. Verify Everything.',
       description: 'Detect phishing, identify impersonation and uncover social engineering attacks with an intelligent AI-powered security assistant.',
       scanCta: 'Scan a Suspicious Message',
       exploreCta: 'Explore Security Features',
@@ -126,7 +126,7 @@ export const translations: Record<SupportedLanguage, Translations> = {
   },
   hi: {
     appName: 'वेरिफ़AI (VERIFAI)',
-    tagline: 'संदेश पर भरोसा न करें। पहचान सत्यापित करें।',
+    tagline: 'आपका संदेश तब तक दोषी है जब तक सत्यापित न हो जाए।',
     subTagline: 'फ़िशिंग, प्रतिरूपण और डिजिटल धोखाधड़ी के ख़िलाफ़ आपका AI सुरक्षा कवच।',
     nav: {
       home: 'होम',
@@ -140,7 +140,7 @@ export const translations: Record<SupportedLanguage, Translations> = {
       quickScan: 'नया संदेश जांचें',
     },
     hero: {
-      headline: 'एक संदेश आपका सब कुछ छीन सकता है। भरोसा करने से पहले जांचें।',
+      headline: 'कुछ भी न मानें। सब कुछ सत्यापित करें।',
       description: 'बुद्धिमान AI सुरक्षा सहायक के साथ फ़िशिंग का पता लगाएं, पहचान की पुष्टि करें और सोशल इंजीनियरिंग हमलों से बचें।',
       scanCta: 'संदिग्ध संदेश स्कैन करें',
       exploreCta: 'सुरक्षा सुविधाएं देखें',

@@ -20,20 +20,20 @@ export const ScoreCircle: React.FC<ScoreCircleProps> = ({
 
   const styleMap: Record<RiskLevel, { stroke: string; glow: string; text: string; dashPattern?: string }> = {
     HIGH: {
-      stroke: '#ffffff',
-      glow: 'rgba(255, 255, 255, 0.4)',
-      text: 'text-white font-extrabold',
+      stroke: '#f43f5e',
+      glow: 'rgba(244, 63, 94, 0.4)',
+      text: 'text-rose-500 font-extrabold',
     },
     MEDIUM: {
-      stroke: '#ffffff',
-      glow: 'rgba(255, 255, 255, 0.25)',
-      text: 'text-white/90 font-bold',
+      stroke: '#f59e0b',
+      glow: 'rgba(245, 158, 11, 0.25)',
+      text: 'text-amber-500 font-bold',
       dashPattern: '8,4',
     },
     LOW: {
-      stroke: 'rgba(255, 255, 255, 0.65)',
-      glow: 'rgba(255, 255, 255, 0.15)',
-      text: 'text-white/80 font-semibold',
+      stroke: '#10b981',
+      glow: 'rgba(16, 185, 129, 0.15)',
+      text: 'text-emerald-500 font-semibold',
     },
     UNVERIFIED: {
       stroke: 'rgba(255, 255, 255, 0.35)',
@@ -69,7 +69,7 @@ export const ScoreCircle: React.FC<ScoreCircleProps> = ({
           r={radius}
           stroke={currentStyle.stroke}
           strokeWidth={strokeWidth}
-          strokeDasharray={currentStyle.dashPattern || circumference}
+          strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
           fill="transparent"

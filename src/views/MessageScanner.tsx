@@ -14,6 +14,18 @@ import {
 } from 'lucide-react';
 import { MessageType, LanguageCode, MessageAnalysisResult, BackendSampleItem } from '../types/security';
 import { SAMPLE_MESSAGES, SampleMessage } from '../services/securityEngine';
+
+const getTierColor = (tier: string) => {
+  if (tier === 'HIGH_RISK') return 'text-rose-500';
+  if (tier === 'SUSPICIOUS') return 'text-amber-500';
+  return 'text-emerald-500';
+};
+
+const getCategoryColor = (category: string) => {
+  if (['Bank KYC Phishing', 'Parcel Scam (Smishing)', 'Utility Threat (Hinglish)', 'Task / Job Fraud', 'OTP Theft', 'Fake Support'].includes(category)) return 'text-rose-500';
+  if (['UPI PIN Deception', 'QR Code'].includes(category)) return 'text-amber-500';
+  return 'text-emerald-500';
+};
 import { analyzeMessageWithStages, ScanStage, fetchBackendSamples } from '../services/apiService';
 import { AnalysisProgressModal } from '../components/AnalysisProgressModal';
 import { CompareModal } from '../components/CompareModal';
@@ -213,8 +225,8 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
                 className="px-3 py-1.5 text-xs rounded-xl glass hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all text-left cursor-pointer"
                 title={sample.description}
               >
-                <span className="font-semibold text-white">
-                  [{sample.expected_tier}]
+                <span className={`font-semibold ${getTierColor(sample.expected_tier)}`}>
+                  [{sample.expected_tier.replace('_', ' ')}]
                 </span>{' '}
                 <span className="font-mono text-white/60">{sample.claimed_identity || sample.channel.toUpperCase()}</span>:{' '}
                 {sample.text.substring(0, 38)}...
@@ -228,7 +240,7 @@ export const MessageScanner: React.FC<MessageScannerProps> = ({
                 onClick={() => handleSelectSample(sample)}
                 className="px-3 py-1.5 text-xs rounded-xl glass hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all text-left cursor-pointer"
               >
-                <span className="font-semibold text-white">[{sample.category}]</span> {sample.label}
+                <span className={`font-semibold ${getCategoryColor(sample.category)}`}>[{sample.category}]</span> {sample.label}
               </button>
             ))
           )}

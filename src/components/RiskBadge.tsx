@@ -16,17 +16,17 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({
   const configs = {
     HIGH: {
       label: 'HIGH RISK',
-      classes: 'bg-white text-black border border-white font-extrabold shadow-[0_0_15px_rgba(255,255,255,0.3)]',
+      classes: 'bg-rose-500 text-white border border-rose-400 font-extrabold shadow-[0_0_15px_rgba(244,63,94,0.3)]',
       icon: AlertCircle,
     },
     MEDIUM: {
       label: 'MEDIUM RISK',
-      classes: 'bg-transparent text-white border-2 border-white font-bold shadow-[inset_0_0_8px_rgba(255,255,255,0.1)]',
+      classes: 'bg-amber-500 text-white border border-amber-400 font-bold shadow-[0_0_8px_rgba(245,158,11,0.2)]',
       icon: AlertTriangle,
     },
     LOW: {
       label: 'LOW RISK',
-      classes: 'bg-white/5 text-white/80 border border-white/30 font-medium',
+      classes: 'bg-emerald-500 text-white border border-emerald-400 font-medium',
       icon: CheckCircle2,
     },
     UNVERIFIED: {

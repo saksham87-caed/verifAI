@@ -23,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'message-scanner', label: 'Message Scanner' },
     { id: 'url-checker', label: 'Link Inspector' },
+    { id: 'identity-checker', label: 'Identity Trust' },
     { id: 'awareness-centre', label: 'Awareness' },
     { id: 'about', label: 'How It Works' },
   ];

@@ -83,20 +83,22 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
 
             {/* Right Column: Visual Shield Asset */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden glass p-2 border border-white/20 shadow-2xl">
-                <img
-                  src="/src/assets/images/hero_cyber_shield_1793379701994.jpg"
-                  alt="verifAI Cybersecurity Operations Shield"
-                  className="w-full h-auto object-cover rounded-xl grayscale contrast-125"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none rounded-xl" />
-                <div className="absolute bottom-5 left-5 right-5 p-3.5 glass-strong rounded-xl border border-white/20 text-[11px] font-mono text-white flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-white inline-block shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse" />
-                    <span>DEFENSIVE ANALYSIS ACTIVE</span>
-                  </div>
-                  <span className="text-white/70">NON-EXECUTING SANDBOX</span>
+              <div className="rounded-2xl glass-strong border border-white/20 p-5 shadow-2xl space-y-4">
+                <div className="flex items-center justify-between text-[10px] font-mono text-white/50 border-b border-white/10 pb-3">
+                    <span className="text-emerald-500 font-bold">VERIFIED SCAN READY</span>
+                    <span>LOCAL ANALYSIS ONLY</span>
+                </div>
+                <div className="space-y-3">
+                    <div className="p-3 rounded-lg bg-white/5 border border-white/10">
+                        <p className="text-[11px] font-mono text-white/90">"Dear user, your HDFC bank account is blocked..."</p>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-rose-500/10 border border-rose-500/20">
+                        <span className="text-[10px] font-mono text-rose-400 uppercase tracking-widest">High Risk</span>
+                        <span className="text-[14px] font-bold text-rose-500 font-mono">92/100</span>
+                    </div>
+                </div>
+                <div className="text-[10px] text-white/40 font-mono pt-2">
+                    // ANALYSIS COMPLETE. THREAT DETECTED.
                 </div>
               </div>
             </div>

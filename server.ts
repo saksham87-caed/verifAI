@@ -23,44 +23,14 @@ import { secLog } from './server/logger';
 dotenv.config();
 
 const app = express();
+process.env.PORT = '3000';
 const PORT = Number(process.env.PORT) || 3000;
 const isProd = process.env.NODE_ENV === 'production';
 
 // Trust proxy for accurate client IP rate limiting behind Cloud Run / reverse proxies
 app.set('trust proxy', 1);
 
-// Security Headers: Real Content Security Policy with configurable frame-ancestors
-// Allows embedding exclusively inside Google AI Studio and development previews
-const defaultFrameAncestors = [
-  "'self'",
-  'https://aistudio.google.com',
-  'https://*.google.com',
-  'https://*.googleusercontent.com',
-  'https://*.run.app',
-];
-
-const allowedFrameAncestors = process.env.ALLOWED_FRAME_ANCESTORS
-  ? process.env.ALLOWED_FRAME_ANCESTORS.split(',').map((s) => s.trim())
-  : defaultFrameAncestors;
-
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
-        imgSrc: ["'self'", 'data:', 'blob:'],
-        connectSrc: ["'self'"],
-        frameAncestors: allowedFrameAncestors,
-      },
-    },
-    frameguard: false, // Frameguard disabled in favor of CSP frame-ancestors to permit verified AI Studio preview
-    crossOriginEmbedderPolicy: false,
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-  })
-);
+app.use(helmet({ contentSecurityPolicy: false, frameguard: false, crossOriginEmbedderPolicy: false, crossOriginResourcePolicy: false }));
 
 // Body parser with 20kb limit
 app.use(express.json({ limit: '20kb' }));
@@ -402,9 +372,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log('Server running on ' + PORT);
-  });
+  app.listen(PORT, "0.0.0.0", () => console.log("Server running on " + PORT));
 }
 
 startServer().catch((err) => {

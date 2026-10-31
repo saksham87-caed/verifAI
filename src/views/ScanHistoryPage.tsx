@@ -108,7 +108,7 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
           {/* Clear History Trigger */}
           <button
             onClick={() => setConfirmClearOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl glass hover:bg-white/15 text-xs font-mono text-white border border-white/20 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-xs font-mono text-rose-500 border border-rose-500/30 transition-all cursor-pointer"
             title="Clear stored scans"
           >
             <Trash2 size={14} />
@@ -129,7 +129,7 @@ export const ScanHistoryPage: React.FC<ScanHistoryPageProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handleClearHistory}
-              className="px-3.5 py-1.5 rounded-xl bg-white text-black font-bold text-xs hover:bg-white/90 transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-rose-500 text-white font-bold text-xs hover:bg-rose-600 transition-colors cursor-pointer"
             >
               Confirm Clear
             </button>

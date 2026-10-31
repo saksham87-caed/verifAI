@@ -196,43 +196,43 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
         </div>
 
         {/* High-Risk Detected */}
-        <div className="p-4 glass rounded-2xl border border-white/25 space-y-2 shadow-[0_0_15px_rgba(255,255,255,0.08)]">
-          <div className="flex items-center justify-between text-white text-xs font-semibold">
+        <div className="p-4 glass rounded-2xl border border-rose-500/50 space-y-2 shadow-[0_0_15px_rgba(244,63,94,0.15)]">
+          <div className="flex items-center justify-between text-rose-500 text-xs font-semibold">
             <span>High-Risk</span>
-            <ShieldAlert size={15} className="text-white" />
+            <ShieldAlert size={15} className="text-rose-500" />
           </div>
-          <p className="text-2xl font-extrabold text-white font-mono tabular-nums">
+          <p className="text-2xl font-extrabold text-rose-500 font-mono tabular-nums">
             {highRiskCount}
           </p>
-          <p className="text-[10px] text-white/60 font-mono">
+          <p className="text-[10px] text-rose-500/60 font-mono">
             {highPercent}% of total
           </p>
         </div>
 
         {/* Medium-Risk Detected */}
-        <div className="p-4 glass rounded-2xl border border-white/20 space-y-2">
-          <div className="flex items-center justify-between text-white/80 text-xs font-semibold">
+        <div className="p-4 glass rounded-2xl border border-amber-500/50 space-y-2 shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+          <div className="flex items-center justify-between text-amber-500 text-xs font-semibold">
             <span>Suspicious</span>
-            <AlertTriangle size={15} className="text-white/80" />
+            <AlertTriangle size={15} className="text-amber-500" />
           </div>
-          <p className="text-2xl font-extrabold text-white/90 font-mono tabular-nums">
+          <p className="text-2xl font-extrabold text-amber-500 font-mono tabular-nums">
             {mediumRiskCount}
           </p>
-          <p className="text-[10px] text-white/50 font-mono">
+          <p className="text-[10px] text-amber-500/60 font-mono">
             {mediumPercent}% of total
           </p>
         </div>
 
         {/* Low-Risk Verified */}
-        <div className="p-4 glass rounded-2xl border border-white/15 space-y-2">
-          <div className="flex items-center justify-between text-white/60 text-xs">
+        <div className="p-4 glass rounded-2xl border border-emerald-500/50 space-y-2 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+          <div className="flex items-center justify-between text-emerald-500 text-xs font-semibold">
             <span>Safe / Low</span>
-            <ShieldCheck size={15} className="text-white/60" />
+            <ShieldCheck size={15} className="text-emerald-500" />
           </div>
-          <p className="text-2xl font-extrabold text-white/80 font-mono tabular-nums">
+          <p className="text-2xl font-extrabold text-emerald-500 font-mono tabular-nums">
             {lowRiskCount}
           </p>
-          <p className="text-[10px] text-white/40 font-mono">
+          <p className="text-[10px] text-emerald-500/60 font-mono">
             {lowPercent}% of total
           </p>
         </div>
@@ -257,33 +257,33 @@ export const SecurityDashboard: React.FC<SecurityDashboardProps> = ({
             <div className="h-4 w-full bg-white/10 rounded-full overflow-hidden flex p-0.5 border border-white/10">
               <div
                 style={{ width: `${highPercent}%` }}
-                className="bg-white h-full rounded-l-full transition-all duration-500 shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                className="bg-rose-500 h-full rounded-l-full transition-all duration-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"
                 title={`High Risk: ${highPercent}%`}
               />
               <div
                 style={{ width: `${mediumPercent}%` }}
-                className="bg-white/60 h-full transition-all duration-500 border-l border-r border-black/20"
+                className="bg-amber-500 h-full transition-all duration-500 border-l border-r border-black/20"
                 title={`Medium Risk: ${mediumPercent}%`}
               />
               <div
                 style={{ width: `${lowPercent}%` }}
-                className="bg-white/20 h-full rounded-r-full transition-all duration-500"
+                className="bg-emerald-500 h-full rounded-r-full transition-all duration-500"
                 title={`Low Risk: ${lowPercent}%`}
               />
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center text-xs pt-2">
-              <div className="p-3 rounded-xl bg-white/15 border border-white/25">
-                <span className="text-[10px] uppercase font-mono text-white/70 block">High Risk</span>
-                <span className="text-lg font-bold text-white font-mono tabular-nums">{highPercent}%</span>
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20">
+                <span className="text-[10px] uppercase font-mono text-rose-500 block">High Risk</span>
+                <span className="text-lg font-bold text-rose-500 font-mono tabular-nums">{highPercent}%</span>
               </div>
-              <div className="p-3 rounded-xl bg-white/10 border border-white/20">
-                <span className="text-[10px] uppercase font-mono text-white/60 block">Suspicious</span>
-                <span className="text-lg font-bold text-white/90 font-mono tabular-nums">{mediumPercent}%</span>
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                <span className="text-[10px] uppercase font-mono text-amber-500 block">Suspicious</span>
+                <span className="text-lg font-bold text-amber-500 font-mono tabular-nums">{mediumPercent}%</span>
               </div>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/15">
-                <span className="text-[10px] uppercase font-mono text-white/50 block">Safe</span>
-                <span className="text-lg font-bold text-white/80 font-mono tabular-nums">{lowPercent}%</span>
+              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                <span className="text-[10px] uppercase font-mono text-emerald-500 block">Safe</span>
+                <span className="text-lg font-bold text-emerald-500 font-mono tabular-nums">{lowPercent}%</span>
               </div>
             </div>
           </div>
